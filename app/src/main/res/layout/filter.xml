@@ -1,10 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="top|center">
+
+    <!-- header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#5d17b2"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="45dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/back"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Food Mood"
+            android:textSize="50sp"
+            android:textColor="#ffffff"
+            />
+    </LinearLayout>
+
+
+
+    <!-- START ONE FILTER __________________________ -->
+    <!-- title of this filter -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="In a Hurry"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:layout_gravity="left"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="15dp"
+            android:text="Select"/>
+
+    </LinearLayout>
+    <!-- END title of this filter -->
+
+    <!-- LL for the list of checked items -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp">
+
+        <!-- One checked list item -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:paddingTop="7dp"
+                android:id="@+id/check"
+                android:scaleType="fitCenter"
+                android:src="@drawable/checkmark"/>
+
+
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Short wait time"
+                android:textSize="20sp"
+                android:layout_toRightOf="@id/check"/>
+
+        </RelativeLayout>
+        <!-- END One checked list item -->
+
+        <!-- One checked list item -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:paddingTop="7dp"
+                android:id="@+id/check"
+                android:scaleType="fitCenter"
+                android:src="@drawable/checkmark"/>
+
+
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Close by"
+                android:textSize="20sp"
+                android:layout_toRightOf="@id/check"/>
+
+        </RelativeLayout>
+        <!-- END One checked list item -->
+    </LinearLayout>
+    <!-- END LL for the list of checked items -->
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"/>
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#C0C0C0"/>
+
+
 </LinearLayout>
