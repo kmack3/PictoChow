@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:id="@+id/frame"
+android:orientation="vertical"
+tools:context="edu.illinois.cs465.pictochow.LuckyCoin">
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp"
+    android:background="#5d17b2"
+    android:orientation="horizontal"
+    tools:context="edu.illinois.cs465.pictochow.LuckyCoin">
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/back"/>
+
+    <TextView
+        android:id="@+id/text_view_id"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Feeling Lucky!"
+        android:textSize="50sp"
+        android:textColor="#FFFFFF"/>
+
+</LinearLayout>
+
+<TextView
+    android:layout_height="0dp"
+    android:layout_width="match_parent"
+    android:layout_weight="1"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:gravity="center"
+    android:textSize="30sp" />
+
+<Button
+    android:id="@+id/choose_for_me"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="80dp"
+    android:layout_marginLeft="80dp"
+    android:layout_marginRight="80dp"
+    android:background="#5d17b2"
+    android:textColor="#FFFFFF"
+    android:textSize="25dp"
+    android:text="Choose for me"
+    />
+
+</LinearLayout>
