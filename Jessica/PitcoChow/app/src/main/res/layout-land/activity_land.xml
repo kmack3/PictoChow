@@ -20,18 +20,18 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="287dp"
+            android:layout_height="match_parent"
             android:src="@drawable/waitingtime" />
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="287dp"
+            android:layout_height="match_parent"
             android:layout_weight="0.64"
             android:src="@drawable/barchart" />
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="287dp"
+            android:layout_height="match_parent"
             android:src="@drawable/radarchartjpg" />
     </LinearLayout>
 
