@@ -29,7 +29,7 @@ public class MapView extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Mapbox.getInstance(this, "pk.eyJ1IjoianVzdGlubWVpZCIsImEiOiJjaXlxcGNkaXQwMDJlMndxa3E0cGEzNnBoIn0.LHVEjoFcv0ZD6Dkp7ObVzQ");
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_map_view);
 
 
         randomButton = (Button) findViewById(R.id.randomButton);
@@ -107,8 +107,7 @@ public class MapView extends Activity {
 
 
     }
-
-
+    
     public void visualizeButtonClick(View v) {
         if (selectMode == false){
             selectMode = true;
