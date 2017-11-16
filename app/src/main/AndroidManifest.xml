@@ -18,6 +18,8 @@
         </activity>
         <activity android:name=".LuckyCoin" />
         <activity android:name=".LuckyResult" />
+        <activity android:name=".Filter"/>
+        <activity android:name=".Visual"/>
     </application>
 
 

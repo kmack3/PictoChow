@@ -1,4 +1,4 @@
-package com.example.jessica.pitcochow;
+package edu.illinois.cs465.pictochow;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;

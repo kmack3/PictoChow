@@ -1,6 +1,7 @@
 package edu.illinois.cs465.pictochow;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
@@ -107,7 +108,15 @@ public class MapView extends Activity {
 
 
     }
-    
+
+    public void buttonHandler(View v){
+        switch(v.getId())
+        {
+            case R.id.filterButton:
+                Intent i = new Intent(this, Filter.class);
+                startActivity(i);
+        }
+    }
     public void visualizeButtonClick(View v) {
         if (selectMode == false){
             selectMode = true;
@@ -115,6 +124,8 @@ public class MapView extends Activity {
         }
         else {
             selectMode = false;
+            Intent i = new Intent(this, Visual.class);
+            startActivity(i);
         }
     }
 

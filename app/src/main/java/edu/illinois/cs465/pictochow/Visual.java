@@ -1,10 +1,13 @@
-package com.example.jessica.pitcochow;
+package edu.illinois.cs465.pictochow;
 
+import android.app.Activity;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class Visual extends AppCompatActivity {
+import edu.illinois.cs465.pictochow.R;
+
+public class Visual extends Activity {
     ViewPager viewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
