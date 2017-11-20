@@ -18,13 +18,15 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
 public class MapView extends Activity {
-
+    private int     filterSelected = -1;
     private com.mapbox.mapboxsdk.maps.MapView mapView;
     private Button randomButton;
     private Button  filterButton;
     private Button  visualizeButton;
     private boolean selectMode = false;
     private int     numberSelected = 0;
+
+    static final int PICK_FILTER_REQUEST = 1;  // The request code
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,7 @@ public class MapView extends Activity {
 
                 // get icons
                 final Icon icon_a_purple = IconFactory.getInstance(MapView.this).fromResource(R.drawable.apurple);
-                Icon icon_f_purple = IconFactory.getInstance(MapView.this).fromResource(R.drawable.fpurple);
+                final Icon icon_f_purple = IconFactory.getInstance(MapView.this).fromResource(R.drawable.fpurple);
                 final Icon icon_a_orange = IconFactory.getInstance(MapView.this).fromResource(R.drawable.aorange);
                 final Icon icon_f_orange = IconFactory.getInstance(MapView.this).fromResource(R.drawable.forange);
 
@@ -114,7 +116,7 @@ public class MapView extends Activity {
         {
             case R.id.filterButton:
                 Intent i = new Intent(this, Filter.class);
-                startActivity(i);
+                startActivityForResult(i, PICK_FILTER_REQUEST);
         }
     }
     public void visualizeButtonClick(View v) {
@@ -126,6 +128,18 @@ public class MapView extends Activity {
             selectMode = false;
             Intent i = new Intent(this, Visual.class);
             startActivity(i);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        if (requestCode == PICK_FILTER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                filterSelected = data.getIntExtra("filter", -1);
+                // need screen to refresh @Brian?
+                Toast.makeText(this, filterSelected, Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
