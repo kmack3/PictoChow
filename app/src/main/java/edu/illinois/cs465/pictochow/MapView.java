@@ -2,12 +2,17 @@ package edu.illinois.cs465.pictochow;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
+import android.support.v4.graphics.ColorUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.BaseMarkerOptions;
@@ -33,20 +38,24 @@ public class MapView extends Activity {
     private MapboxMap mapbox_map;
     private Icon icons [];
     private Marker markers [];
+
+    // Icons
     Icon icon_a_purple;
     Icon icon_f_purple;
     Icon icon_a_orange;
     Icon icon_f_orange;
     Icon icon_cur_loc;
-
+    // Markers
     Marker markerOne;
     Marker markerTwo;
     Marker markerThree;
     Marker markerFour;
+    // Buttons
+    Button compareButton;
+    CompoundButton visualizeButton;
 
+    Boolean selectMode = false;
     static final int PICK_FILTER_REQUEST = 1;  // The request code
-
-
     ArrayList<String> selected = new ArrayList<String>();
 
     @Override
@@ -58,8 +67,10 @@ public class MapView extends Activity {
         // get buttons
         // randomButton = (Button) findViewById(R.id.randomButton);
         // filterButton = (Button) findViewById(R.id.filterButton);
-        // visualizeButton = (Button) findViewById(R.id.visualizeButton);
+        visualizeButton = (CompoundButton) findViewById(R.id.visualizeButton);
 
+        compareButton = (Button) findViewById(R.id.compareButton);
+        compareButton.setVisibility(View.GONE);
 
         // map stuff
         mapView = (com.mapbox.mapboxsdk.maps.MapView) findViewById(R.id.mapView);
@@ -121,39 +132,44 @@ public class MapView extends Activity {
                 mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
                     @Override
                     public boolean onMarkerClick(@NonNull Marker marker) {
+                       if(selectMode){
+                            // toggle all markers except the current location marker
+                            if(marker.getIcon()!=icon_cur_loc) {
+                                // check if marker has been selected
+                                if (selected.contains(marker.getTitle())) {
+                                    // toggle icon
+                                    if (marker.getIcon() == icon_a_orange) {
+                                        marker.setIcon(icon_a_purple);
+                                    } else {
+                                        marker.setIcon(icon_f_purple);
+                                    }
 
-                        // toggle all markers except the current location marker
-                        if(marker.getIcon()!=icon_cur_loc) {
-                            // check if marker has been selected
-                            if (selected.contains(marker.getTitle())) {
-                                // toggle icon
-                                if(marker.getIcon()==icon_a_orange){
-                                    marker.setIcon(icon_a_purple);
+
+                                    // remove from selected arraylist
+                                    selected.remove(marker.getTitle());
+
+                                } else {
+                                    // toggle icon
+                                    if (marker.getIcon() == icon_a_purple) {
+                                        marker.setIcon(icon_a_orange);
+                                    } else {
+                                        marker.setIcon(icon_f_orange);
+                                    }
+
+                                    // add to selected arraylist
+                                    selected.add(marker.getTitle());
                                 }
-                                else {
-                                    marker.setIcon(icon_f_purple);
+
+                                if (selected.size() == 2) {
+                                    compareButton.setText(selected.get(0) + " vs. " + selected.get(1));
+                                    compareButton.setVisibility(View.VISIBLE);
+                                } else {
+                                    compareButton.setVisibility(View.GONE);
                                 }
-
-
-                                // remove from selected arraylist
-                                selected.remove(marker.getTitle());
-
-                            } else {
-                                // toggle icon
-                                if(marker.getIcon()==icon_a_purple){
-                                    marker.setIcon(icon_a_orange);
-                                }
-                                else {
-                                    marker.setIcon(icon_f_orange);
-                                }
-
-                                // add to selected arraylist
-                                selected.add(marker.getTitle());
                             }
-                        }
-
-                        // return false if you still want the bubble to appear when selecting the marker
-                        return false;
+                       }
+                            // return false if you still want the bubble to appear when selecting the marke
+                       return false;
                     }
                 });
             }
@@ -176,9 +192,25 @@ public class MapView extends Activity {
                 break;
 
             case R.id.visualizeButton:
+                selectMode = !selectMode;
+                if(selectMode){
+                    visualizeButton.setChecked(true);
+                    Toast.makeText(this, "Select two restaurants to compare", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    visualizeButton.setChecked(false);
+                    compareButton.setVisibility(View.GONE);
+                    DeselectAllMarkers();
+                    selected.clear();
+                }
+                break;
+
+            case R.id.compareButton:
                 Intent j = new Intent(this, Visual.class);
+                j.putExtra("title", selected.get(0) + " vs. " + selected.get(1));
                 startActivity(j);
                 break;
+
         }
     }
 
@@ -210,6 +242,18 @@ public class MapView extends Activity {
                 break;
         }
 
+    }
+
+    public void DeselectAllMarkers(){
+        Marker m []= new Marker[]{markerOne, markerTwo, markerThree, markerFour};
+        for(Marker mark: m){
+            if (mark.getIcon() == icon_a_orange) {
+                mark.setIcon(icon_a_purple);
+            }
+            else if (mark.getIcon() == icon_f_orange){
+                mark.setIcon(icon_f_purple);
+            }
+        }
     }
 
 
