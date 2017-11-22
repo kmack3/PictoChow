@@ -50,6 +50,7 @@ public class MapView extends Activity {
     Marker markerTwo;
     Marker markerThree;
     Marker markerFour;
+    Marker markerFive;
     // Buttons
     Button compareButton;
     CompoundButton visualizeButton;
@@ -101,28 +102,35 @@ public class MapView extends Activity {
                 markerOne = mapboxMap.addMarker(new MarkerOptions()
                         .position(new LatLng(40.110113,-88.233218))
                         .title("Sakanaya")
-                        .snippet("5 Stars")
+                        .snippet("$$$\n★★★★\nSushi, Ramen")
                         .icon(icon_f_purple)
                 );
 
                 markerTwo = mapboxMap.addMarker(new MarkerOptions()
                         .position(new LatLng(40.1100646,-88.2296092))
                         .title("Cracked")
-                        .snippet("4 Stars")
+                        .snippet("$$\n★★★\nSandwich")
                         .icon(icon_a_purple)
                 );
 
                 markerThree = mapboxMap.addMarker(new MarkerOptions()
                         .position(new LatLng(40.1111668573957,-88.2305980101228))
                         .title("Salad Meister")
-                        .snippet("4 Stars")
+                        .snippet("$$\n★★★★\nSalad, Bread")
                         .icon(icon_f_purple)
                 );
 
                 markerFour = mapboxMap.addMarker(new MarkerOptions()
                         .position(new LatLng(40.1105683,-88.2325823))
                         .title("Bangkok Thai and Pho")
-                        .snippet("5 Stars")
+                        .snippet("$$\n★★★★★\nPho, Rice Noodle")
+                        .icon(icon_a_purple)
+                );
+
+                markerFive = mapboxMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(40.1104414,-88.2317108))
+                        .title("Spoon House")
+                        .snippet("$$\n★★★★\nKorean, Kimchi")
                         .icon(icon_a_purple)
                 );
 
@@ -188,6 +196,8 @@ public class MapView extends Activity {
 
             case R.id.randomButton:
                 Intent k = new Intent(this, LuckyCoin.class);
+                String lucky_data[] = {markerOne.getTitle(), markerTwo.getTitle(), markerThree.getTitle(), markerFour.getTitle(), markerFive.getTitle()};
+                k.putExtra("restaurant_names",lucky_data);
                 startActivity(k);
                 break;
 
@@ -221,31 +231,35 @@ public class MapView extends Activity {
                 markerTwo.setIcon(icon_f_purple);
                 markerThree.setIcon(icon_a_purple);
                 markerFour.setIcon(icon_f_purple);
+                markerFive.setIcon(icon_a_purple);
                 break;
             case 1:
                 markerOne.setIcon(icon_f_purple);
                 markerTwo.setIcon(icon_a_purple);
                 markerThree.setIcon(icon_f_purple);
                 markerFour.setIcon(icon_a_purple);
+                markerFive.setIcon(icon_f_purple);
                 break;
             case 2:
                 markerOne.setIcon(icon_f_purple);
                 markerTwo.setIcon(icon_a_purple);
                 markerThree.setIcon(icon_a_purple);
                 markerFour.setIcon(icon_f_purple);
+                markerFive.setIcon(icon_a_purple);
                 break;
             case 3:
                 markerOne.setIcon(icon_a_purple);
                 markerTwo.setIcon(icon_f_purple);
                 markerThree.setIcon(icon_f_purple);
                 markerFour.setIcon(icon_a_purple);
+                markerFive.setIcon(icon_f_purple);
                 break;
         }
 
     }
 
     public void DeselectAllMarkers(){
-        Marker m []= new Marker[]{markerOne, markerTwo, markerThree, markerFour};
+        Marker m []= new Marker[]{markerOne, markerTwo, markerThree, markerFour, markerFive};
         for(Marker mark: m){
             if (mark.getIcon() == icon_a_orange) {
                 mark.setIcon(icon_a_purple);
