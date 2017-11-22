@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:text="Visualize"
             android:layout_gravity="right"
-            android:onClick="visualizeButtonClick"/>
+            android:onClick="buttonHandler"/>
     </LinearLayout>
 
     <com.mapbox.mapboxsdk.maps.MapView

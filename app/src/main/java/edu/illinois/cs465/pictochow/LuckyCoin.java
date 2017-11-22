@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -45,6 +46,7 @@ public class LuckyCoin extends Activity implements View.OnClickListener {
     }
 
     public void onClick(View v) {
+        Log.d("doesthiswork", "onclick");
         if (v.getId() == R.id.choose_for_me) {
             Intent intent = new Intent(this,LuckyResult.class);
             intent.putExtra("chosen","Miaza's");

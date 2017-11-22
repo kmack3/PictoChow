@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.BaseMarkerOptions;
 import com.mapbox.mapboxsdk.annotations.Icon;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
@@ -17,16 +19,35 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 public class MapView extends Activity {
     private int     filterSelected = -1;
     private com.mapbox.mapboxsdk.maps.MapView mapView;
-    private Button randomButton;
-    private Button  filterButton;
-    private Button  visualizeButton;
-    private boolean selectMode = false;
-    private int     numberSelected = 0;
+    private MapboxMap mapbox_map;
+    private Icon icons [];
+    private Marker markers [];
+    Icon icon_a_purple;
+    Icon icon_f_purple;
+    Icon icon_a_orange;
+    Icon icon_f_orange;
+    Icon icon_cur_loc;
+
+    Marker markerOne;
+    Marker markerTwo;
+    Marker markerThree;
+    Marker markerFour;
 
     static final int PICK_FILTER_REQUEST = 1;  // The request code
+
+
+    ArrayList<String> selected = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,74 +55,104 @@ public class MapView extends Activity {
         Mapbox.getInstance(this, "pk.eyJ1IjoianVzdGlubWVpZCIsImEiOiJjaXlxcGNkaXQwMDJlMndxa3E0cGEzNnBoIn0.LHVEjoFcv0ZD6Dkp7ObVzQ");
         setContentView(R.layout.activity_map_view);
 
-
-        randomButton = (Button) findViewById(R.id.randomButton);
-        filterButton = (Button) findViewById(R.id.filterButton);
-        visualizeButton = (Button) findViewById(R.id.visualizeButton);
-
-        // the following link has how to create intent from these buttons
+        // get buttons
+        // randomButton = (Button) findViewById(R.id.randomButton);
+        // filterButton = (Button) findViewById(R.id.filterButton);
+        // visualizeButton = (Button) findViewById(R.id.visualizeButton);
 
 
         // map stuff
-
         mapView = (com.mapbox.mapboxsdk.maps.MapView) findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(MapboxMap mapboxMap) {
 
-                // get icons
-                final Icon icon_a_purple = IconFactory.getInstance(MapView.this).fromResource(R.drawable.apurple);
-                final Icon icon_f_purple = IconFactory.getInstance(MapView.this).fromResource(R.drawable.fpurple);
-                final Icon icon_a_orange = IconFactory.getInstance(MapView.this).fromResource(R.drawable.aorange);
-                final Icon icon_f_orange = IconFactory.getInstance(MapView.this).fromResource(R.drawable.forange);
+                // map
+                mapbox_map = mapboxMap;
 
-                // One way to add a marker view
+                // get icons
+                icon_a_purple = IconFactory.getInstance(MapView.this).fromResource(R.drawable.apurple);
+                icon_f_purple = IconFactory.getInstance(MapView.this).fromResource(R.drawable.fpurple);
+                icon_a_orange = IconFactory.getInstance(MapView.this).fromResource(R.drawable.aorange);
+                icon_f_orange = IconFactory.getInstance(MapView.this).fromResource(R.drawable.forange);
+                icon_cur_loc = IconFactory.getInstance(MapView.this).fromResource(R.drawable.currentlocation);
+
+
+
+                // current location marker
                 mapboxMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(40.110281,-88.232022))
+                        .icon(icon_cur_loc)
+                );
+
+                // restaurant markers
+                markerOne = mapboxMap.addMarker(new MarkerOptions()
                         .position(new LatLng(40.110113,-88.233218))
                         .title("Sakanaya")
                         .snippet("5 Stars")
-                        .icon(icon_a_purple)
+                        .icon(icon_f_purple)
                 );
 
-                mapboxMap.addMarker(new MarkerOptions()
+                markerTwo = mapboxMap.addMarker(new MarkerOptions()
                         .position(new LatLng(40.1100646,-88.2296092))
                         .title("Cracked")
                         .snippet("4 Stars")
                         .icon(icon_a_purple)
                 );
 
-                mapboxMap.addMarker(new MarkerOptions()
+                markerThree = mapboxMap.addMarker(new MarkerOptions()
                         .position(new LatLng(40.1111668573957,-88.2305980101228))
                         .title("Salad Meister")
                         .snippet("4 Stars")
-                        .icon(icon_a_purple)
+                        .icon(icon_f_purple)
                 );
 
-                mapboxMap.addMarker(new MarkerOptions()
+                markerFour = mapboxMap.addMarker(new MarkerOptions()
                         .position(new LatLng(40.1105683,-88.2325823))
                         .title("Bangkok Thai and Pho")
                         .snippet("5 Stars")
                         .icon(icon_a_purple)
                 );
 
+
+
+                // marker click listener
                 mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
                     @Override
                     public boolean onMarkerClick(@NonNull Marker marker) {
-                        if(selectMode == true) {
-                            if(marker.getIcon() == icon_a_orange){
-                                marker.setIcon(icon_a_purple);
-                                numberSelected = numberSelected + 1;
-                                if(numberSelected >= 1){
-                                    // call some function to go to visualization activity
 
+                        // toggle all markers except the current location marker
+                        if(marker.getIcon()!=icon_cur_loc) {
+                            // check if marker has been selected
+                            if (selected.contains(marker.getTitle())) {
+                                // toggle icon
+                                if(marker.getIcon()==icon_a_orange){
+                                    marker.setIcon(icon_a_purple);
                                 }
-                            }
-                            else {
-                                marker.setIcon(icon_a_orange);
-                                numberSelected--;
+                                else {
+                                    marker.setIcon(icon_f_purple);
+                                }
+
+
+                                // remove from selected arraylist
+                                selected.remove(marker.getTitle());
+
+                            } else {
+                                // toggle icon
+                                if(marker.getIcon()==icon_a_purple){
+                                    marker.setIcon(icon_a_orange);
+                                }
+                                else {
+                                    marker.setIcon(icon_f_orange);
+                                }
+
+                                // add to selected arraylist
+                                selected.add(marker.getTitle());
                             }
                         }
+
+                        // return false if you still want the bubble to appear when selecting the marker
                         return false;
                     }
                 });
@@ -117,19 +168,50 @@ public class MapView extends Activity {
             case R.id.filterButton:
                 Intent i = new Intent(this, Filter.class);
                 startActivityForResult(i, PICK_FILTER_REQUEST);
+                break;
+
+            case R.id.randomButton:
+                Intent k = new Intent(this, LuckyCoin.class);
+                startActivity(k);
+                break;
+
+            case R.id.visualizeButton:
+                Intent j = new Intent(this, Visual.class);
+                startActivity(j);
+                break;
         }
     }
-    public void visualizeButtonClick(View v) {
-        if (selectMode == false){
-            selectMode = true;
-            Toast.makeText(this, "Select two restaurants", Toast.LENGTH_SHORT).show();
+
+    public void updateMarkers(){
+        switch (filterSelected){
+            case 0:
+                markerOne.setIcon(icon_a_purple);
+                markerTwo.setIcon(icon_f_purple);
+                markerThree.setIcon(icon_a_purple);
+                markerFour.setIcon(icon_f_purple);
+                break;
+            case 1:
+                markerOne.setIcon(icon_f_purple);
+                markerTwo.setIcon(icon_a_purple);
+                markerThree.setIcon(icon_f_purple);
+                markerFour.setIcon(icon_a_purple);
+                break;
+            case 2:
+                markerOne.setIcon(icon_f_purple);
+                markerTwo.setIcon(icon_a_purple);
+                markerThree.setIcon(icon_a_purple);
+                markerFour.setIcon(icon_f_purple);
+                break;
+            case 3:
+                markerOne.setIcon(icon_a_purple);
+                markerTwo.setIcon(icon_f_purple);
+                markerThree.setIcon(icon_f_purple);
+                markerFour.setIcon(icon_a_purple);
+                break;
         }
-        else {
-            selectMode = false;
-            Intent i = new Intent(this, Visual.class);
-            startActivity(i);
-        }
+
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -137,8 +219,11 @@ public class MapView extends Activity {
         if (requestCode == PICK_FILTER_REQUEST) {
             if (resultCode == RESULT_OK) {
                 filterSelected = data.getIntExtra("filter", -1);
-                // need screen to refresh @Brian?
-                Toast.makeText(this, filterSelected, Toast.LENGTH_SHORT).show();
+                String filterNames []= new String[]{ "College", "Hurry", "Fancy", "Healthy"};
+                if(filterSelected > -1){
+                    Toast.makeText(this, filterNames[filterSelected], Toast.LENGTH_SHORT).show();
+                }
+                updateMarkers();
             }
         }
     }
