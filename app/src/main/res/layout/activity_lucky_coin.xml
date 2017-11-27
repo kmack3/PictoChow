@@ -16,19 +16,15 @@ tools:context="edu.illinois.cs465.pictochow.LuckyCoin">
     android:paddingTop="10dp"
     android:background="#5d17b2"
     android:orientation="horizontal"
+    android:gravity="center"
     tools:context="edu.illinois.cs465.pictochow.LuckyCoin">
-
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/back"/>
 
     <TextView
         android:id="@+id/text_view_id"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="Feeling Lucky!"
+        android:layout_gravity="center"
         android:textSize="50sp"
         android:textColor="#FFFFFF"/>
 

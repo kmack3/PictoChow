@@ -30,13 +30,14 @@
             android:layout_gravity="right"
             />
 
-        <Button
+        <ToggleButton
             android:id="@+id/visualizeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Visualize"
+            android:textOn="Visualize Mode"
+            android:textOff="Visualize Mode"
             android:layout_gravity="right"
-            android:onClick="visualizeButtonClick"/>
+            android:onClick="buttonHandler"/>
     </LinearLayout>
 
     <com.mapbox.mapboxsdk.maps.MapView
@@ -48,5 +49,14 @@
         mapbox:mapbox_cameraTargetLng="-88.232022"
         mapbox:mapbox_styleUrl="mapbox://styles/mapbox/light-v9"
         mapbox:mapbox_cameraZoom="16" />
+
+    <Button
+        android:id="@+id/compareButton"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:onClick="buttonHandler"/>
 
 </RelativeLayout>

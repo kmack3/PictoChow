@@ -11,18 +11,12 @@
         android:background="#5d17b2"
         android:gravity="center">
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginRight="45dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/back"/>
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Food Mood"
             android:textSize="50sp"
+            android:gravity="center"
             android:textColor="#ffffff"
             />
     </LinearLayout>
