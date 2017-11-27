@@ -15,7 +15,7 @@ import android.widget.ImageView;
 public class ViewPagerAdapter extends PagerAdapter{
     private Context context;
     private LayoutInflater layoutInflater;
-    private  Integer [] images = {R.drawable.barchart,R.drawable.radarchartjpg,R.drawable.wordmap,R.drawable.waitingtime};
+    private  Integer [] images = {R.drawable.barchart,R.drawable.radarchartjpg,R.drawable.wordmap,R.drawable.wait};
 
     public ViewPagerAdapter(Context context){
         this.context = context;

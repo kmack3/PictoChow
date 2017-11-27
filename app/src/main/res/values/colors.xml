@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="buttonGrey">#BDBDBD</color>
+    <color name="backgroundPurple">#B39DDB</color>
+    <color name="purple">#5d17b2</color>
 </resources>

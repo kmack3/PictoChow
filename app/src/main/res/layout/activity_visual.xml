@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="180sp"
                 android:layout_marginBottom="20sp"
-                android:src="@drawable/waitingtime"
+                android:src="@drawable/wait"
                 android:visibility="visible" />
 
             <ImageView

@@ -12,7 +12,9 @@
         android:id="@+id/compareTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
+        android:text="Mia's vs Subways"
+        android:textColor="@color/purple"
+        android:textSize="22sp"
         android:textAlignment="center"
         android:layout_marginTop="50dp"/>
 </RelativeLayout>
