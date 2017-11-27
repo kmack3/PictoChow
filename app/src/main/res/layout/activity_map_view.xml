@@ -10,30 +10,43 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="right"
-        android:background="#FFF">
-
+        android:paddingBottom="3dp"
+        android:paddingTop="3dp"
+        android:gravity="right">
         <Button
             android:id="@+id/filterButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Filters"
             android:onClick="buttonHandler"
+            android:textSize="18sp"
+            android:paddingRight="2dp"
+            android:paddingLeft="2dp"
+            android:background="@color/buttonGrey"
             android:layout_gravity="left" />
 
         <Button
             android:id="@+id/randomButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Random"
-            android:onClick="buttonHandler"
             android:layout_gravity="right"
-            />
+            android:background="@color/buttonGrey"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:paddingRight="2dp"
+            android:paddingLeft="2dp"
+            android:textSize="18sp"
+            android:onClick="buttonHandler"
+            android:text="Random" />
 
         <ToggleButton
             android:id="@+id/visualizeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/buttonGrey"
+            android:paddingRight="2dp"
+            android:paddingLeft="2dp"
+            android:textSize="18sp"
             android:textOn="Visualize Mode"
             android:textOff="Visualize Mode"
             android:layout_gravity="right"
