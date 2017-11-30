@@ -8,7 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#5d17b2"
+        android:background="#AE8BD8"
         android:gravity="center">
 
         <TextView
@@ -57,7 +57,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginLeft="20dp">
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp">
 
         <!-- One checked list item -->
         <RelativeLayout
@@ -113,12 +114,6 @@
     </LinearLayout>
     <!-- END LL for the list of checked items -->
 
-    <TextView
-        android:layout_marginTop="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:background="#C0C0C0"/>
-
 
 
 
@@ -155,7 +150,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginLeft="20dp">
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp">
 
         <!-- One checked list item -->
         <RelativeLayout
@@ -211,11 +207,6 @@
     </LinearLayout>
     <!-- END LL for the list of checked items -->
 
-    <TextView
-        android:layout_marginTop="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:background="#C0C0C0"/>
 
 
 
@@ -256,7 +247,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginLeft="20dp">
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp">
 
         <!-- One checked list item -->
         <RelativeLayout
@@ -338,12 +330,6 @@
     </LinearLayout>
     <!-- END LL for the list of checked items -->
 
-    <TextView
-        android:layout_marginTop="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:background="#C0C0C0"/>
-
 
 
 
@@ -381,7 +367,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginLeft="20dp">
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp">
 
         <!-- One checked list item -->
         <RelativeLayout
@@ -437,11 +424,6 @@
     </LinearLayout>
     <!-- END LL for the list of checked items -->
 
-    <TextView
-        android:layout_marginTop="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:background="#C0C0C0"/>
 
 
 </LinearLayout>
