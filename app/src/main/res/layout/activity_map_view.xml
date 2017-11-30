@@ -37,7 +37,7 @@
             android:paddingLeft="2dp"
             android:textSize="18sp"
             android:onClick="buttonHandler"
-            android:text="Random" />
+            android:text="I'm Feeling Lucky" />
 
         <ToggleButton
             android:id="@+id/visualizeButton"

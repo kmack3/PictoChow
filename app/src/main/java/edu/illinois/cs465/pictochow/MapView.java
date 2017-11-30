@@ -195,7 +195,7 @@ public class MapView extends Activity {
                 break;
 
             case R.id.randomButton:
-                Intent k = new Intent(this, LuckyCoin.class);
+                Intent k = new Intent(this, LuckyResult.class);
                 String lucky_data[] = {markerOne.getTitle(), markerTwo.getTitle(), markerThree.getTitle(), markerFour.getTitle(), markerFive.getTitle()};
                 k.putExtra("restaurant_names",lucky_data);
                 startActivity(k);
