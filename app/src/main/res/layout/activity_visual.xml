@@ -7,13 +7,10 @@
 
     <ScrollView
         android:id="@+id/visualParent"
-        android:layout_width="368dp"
-        android:layout_height="495dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:scrollbarStyle="insideInset"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:fadeScrollbars="false">
 
@@ -24,28 +21,122 @@
             android:visibility="visible"
             android:weightSum="1">
 
-            <ImageView
+
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:layout_height="180sp"
+                android:gravity="center"
+                android:textSize="24dp"
+                android:textColor="#AE8BD8"
+                android:paddingTop="50dp"
+                android:paddingBottom="40dp"
+                android:textStyle="bold"
+                android:text="Ttile" />
+
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:textSize="16dp"
+                android:paddingBottom="5dp"
+                android:text="Wait time (minutes)" />
+
+            <com.github.mikephil.charting.charts.HorizontalBarChart
+                android:id="@+id/chart"
+                android:layout_width="match_parent"
+                android:layout_height="300sp"
                 android:layout_marginBottom="20sp"
-                android:src="@drawable/wait"
                 android:visibility="visible" />
 
-            <ImageView
-                android:id="@+id/imageView"
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="180sp"
-                android:layout_marginBottom="20sp"
-                android:layout_weight="0.42"
-                android:src="@drawable/barchart"
-                android:visibility="visible" />
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
 
-            <ImageView
+            <TextView
+                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                android:layout_height="180sp"
-                android:layout_marginBottom="20sp"
-                android:src="@drawable/radarchartjpg"
-                android:visibility="visible" />
+                android:gravity="center"
+                android:layout_marginTop="30dp"
+                android:paddingBottom="5dp"
+                android:textSize="16dp"
+                android:text="Distance (meters)" />
+
+
+            <com.github.mikephil.charting.charts.HorizontalBarChart
+            android:id="@+id/distance"
+            android:layout_width="match_parent"
+            android:layout_height="300sp"
+            android:layout_marginBottom="20sp"
+            android:visibility="visible" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_marginTop="30dp"
+                android:paddingBottom="5dp"
+                android:textSize="16dp"
+                android:text="Popularity during a day (customer count)" />
+
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/popularity"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginBottom="20sp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <TextView
+                android:id="@+id/rating_title_one"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:paddingBottom="5dp"
+                android:textSize="16dp"
+                android:text="Yelp rating" />
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/rating_one"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginBottom="20sp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+
+            <TextView
+                android:id="@+id/rating_title_two"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:paddingBottom="5dp"
+                android:textSize="16dp"
+                android:text="Yelp rating" />
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/rating_two"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginBottom="20sp"/>
+
         </LinearLayout>
 
 

@@ -327,7 +327,7 @@ public class MapView extends Activity {
 
             case R.id.compareButton:
                 Intent j = new Intent(this, Visual.class);
-                j.putExtra("title", selected.get(0) + " vs. " + selected.get(1));
+                j.putExtra("title", selected.get(0) + "," + selected.get(1));
                 startActivity(j);
                 break;
 
