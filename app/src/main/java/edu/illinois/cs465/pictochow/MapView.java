@@ -62,6 +62,7 @@ public class MapView extends Activity {
     Boolean selectMode = false;
     static final int PICK_FILTER_REQUEST = 1;  // The request code
     ArrayList<String> selected = new ArrayList<String>();
+    ArrayList<String> selected_filters = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -197,6 +198,9 @@ public class MapView extends Activity {
         {
             case R.id.filterButton:
                 Intent i = new Intent(this, Filter.class);
+                for (String filter: selected_filters) {
+                    i.putExtra(filter, true);
+                }
                 startActivityForResult(i, PICK_FILTER_REQUEST);
                 break;
 
@@ -280,13 +284,31 @@ public class MapView extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_FILTER_REQUEST) {
             if (resultCode == RESULT_OK) {
-                filterSelected = data.getIntExtra("filter", -1);
-                String filterNames []= new String[]{ "College", "Hurry", "Fancy", "Healthy"};
-                if(filterSelected > -1){
-                    Toast.makeText(this, filterNames[filterSelected], Toast.LENGTH_SHORT).show();
+                String toasty = "";
+                Boolean hurry = data.getBooleanExtra("hurry", false);
+                if (hurry){
+                    toasty = toasty + "In a Hurry. ";
+                    selected_filters.add("hurry");
                 }
+                Boolean healthy = data.getBooleanExtra("healthy", false);
+                if (healthy){
+                    toasty = toasty + "Healthy. ";
+                    selected_filters.add("healthy");
+                }
+                Boolean college = data.getBooleanExtra("college", false);
+                if (college){
+                    toasty = toasty + "Broke Student. ";
+                    selected_filters.add("college");
+                }
+                Boolean fancy = data.getBooleanExtra("fancy", false);
+                if (fancy){
+                    toasty = toasty + "Nice Dinner. ";
+                    selected_filters.add("fancy");
+                }
+                Toast.makeText(this, toasty, Toast.LENGTH_SHORT).show();
                 updateMarkers();
             }
         }
