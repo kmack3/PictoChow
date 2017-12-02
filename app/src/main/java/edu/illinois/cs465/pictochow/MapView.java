@@ -44,11 +44,19 @@ public class MapView extends Activity {
     private Map<String, Map<String, String>> rest_data;
 
     // Icons
-    Icon icon_a_purple;
-    Icon icon_f_purple;
-    Icon icon_a_orange;
-    Icon icon_f_orange;
+
     Icon icon_cur_loc;
+
+
+    Icon icon_100_green;
+    Icon icon_100_purple;
+    Icon icon_75_green;
+    Icon icon_75_purple;
+    Icon icon_50_green;
+    Icon icon_50_purple;
+    Icon icon_25_green;
+    Icon icon_25_purple;
+
     // Markers
     Marker markerOne;
     Marker markerTwo;
@@ -90,11 +98,16 @@ public class MapView extends Activity {
                 mapbox_map = mapboxMap;
 
                 // get icons
-                icon_a_purple = IconFactory.getInstance(MapView.this).fromResource(R.drawable.apurple);
-                icon_f_purple = IconFactory.getInstance(MapView.this).fromResource(R.drawable.fpurple);
-                icon_a_orange = IconFactory.getInstance(MapView.this).fromResource(R.drawable.aorange);
-                icon_f_orange = IconFactory.getInstance(MapView.this).fromResource(R.drawable.forange);
                 icon_cur_loc = IconFactory.getInstance(MapView.this).fromResource(R.drawable.currentlocation);
+
+                icon_100_green = IconFactory.getInstance(MapView.this).fromResource(R.drawable.agreen);
+                icon_100_purple = IconFactory.getInstance(MapView.this).fromResource(R.drawable.apurple);
+                icon_75_green = IconFactory.getInstance(MapView.this).fromResource(R.drawable.bgreen);
+                icon_75_purple = IconFactory.getInstance(MapView.this).fromResource(R.drawable.bpurple);
+                icon_50_green = IconFactory.getInstance(MapView.this).fromResource(R.drawable.cgreen);
+                icon_50_purple = IconFactory.getInstance(MapView.this).fromResource(R.drawable.cpurple);
+                icon_25_green = IconFactory.getInstance(MapView.this).fromResource(R.drawable.dgreen);
+                icon_25_purple = IconFactory.getInstance(MapView.this).fromResource(R.drawable.dpurple);
 
 
 
@@ -109,35 +122,35 @@ public class MapView extends Activity {
                         .position(new LatLng(40.110113,-88.233218))
                         .title("Sakanaya")
                         .snippet("$$$\n★★★★\nSushi, Ramen")
-                        .icon(icon_f_purple)
+                        .icon(icon_100_green)
                 );
 
                 markerTwo = mapboxMap.addMarker(new MarkerOptions()
                         .position(new LatLng(40.1100646,-88.2296092))
                         .title("Cracked")
                         .snippet("$$\n★★★\nSandwich")
-                        .icon(icon_a_purple)
+                        .icon(icon_100_green)
                 );
 
                 markerThree = mapboxMap.addMarker(new MarkerOptions()
                         .position(new LatLng(40.1111668573957,-88.2305980101228))
                         .title("Salad Meister")
                         .snippet("$$\n★★★★\nSalad, Bread")
-                        .icon(icon_f_purple)
+                        .icon(icon_100_green)
                 );
 
                 markerFour = mapboxMap.addMarker(new MarkerOptions()
                         .position(new LatLng(40.1105683,-88.2325823))
                         .title("Bangkok Thai and Pho")
                         .snippet("$$\n★★★★★\nPho, Rice Noodle")
-                        .icon(icon_a_purple)
+                        .icon(icon_100_green)
                 );
 
                 markerFive = mapboxMap.addMarker(new MarkerOptions()
                         .position(new LatLng(40.1104414,-88.2317108))
                         .title("Spoon House")
                         .snippet("$$\n★★★★\nKorean, Kimchi")
-                        .icon(icon_a_purple)
+                        .icon(icon_100_green)
                 );
 
 
@@ -149,6 +162,9 @@ public class MapView extends Activity {
                        if(selectMode){
                             // toggle all markers except the current location marker
                             if(marker.getIcon()!=icon_cur_loc) {
+                                // toggle icon
+                                IconToggle(marker);
+
                                 // check if marker has been selected
                                 if (selected.contains(marker.getTitle())) {
                                     // toggle icon
@@ -189,6 +205,19 @@ public class MapView extends Activity {
             }
         });
 
+
+    }
+
+    public void IconToggle(Marker m){
+        Icon curIcon = m.getIcon();
+        if(curIcon == icon_100_purple){ m.setIcon(icon_100_green); }
+        else if(curIcon == icon_100_green){ m.setIcon(icon_100_purple); }
+        else if(curIcon == icon_75_purple){ m.setIcon(icon_75_green); }
+        else if(curIcon == icon_75_green){ m.setIcon(icon_75_purple); }
+        else if(curIcon == icon_50_purple){ m.setIcon(icon_50_green); }
+        else if(curIcon == icon_50_green){ m.setIcon(icon_50_purple); }
+        else if(curIcon == icon_25_purple){ m.setIcon(icon_25_green); }
+        else if(curIcon == icon_25_green){ m.setIcon(icon_25_purple); }
 
     }
 
