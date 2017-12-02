@@ -142,6 +142,8 @@ public class MapView extends Activity {
                 icon_25_purple = IconFactory.getInstance(MapView.this).fromBitmap(scaled_dpurple);
 
 
+
+
                 // current location marker
                 mapboxMap.addMarker(new MarkerOptions()
                         .position(new LatLng(40.110281,-88.232022))
@@ -185,6 +187,8 @@ public class MapView extends Activity {
                 );
 
                 updateMarkers();
+                updateSnippets();
+
 
 
 
@@ -272,16 +276,16 @@ public class MapView extends Activity {
                     snippet += "Sit down\n";
                 }
 
+                String rating = rest_data.get(mark.getTitle()).get("rating");
+                for(int x = 0; x < Integer.parseInt(rating); x++){
+                    snippet += "★";
+                }
+                snippet += "\n";
+
             }
             // add type to snippet always
-            snippet += rest_data.get(mark.getTitle()).get("type") + "\n";
+            snippet += rest_data.get(mark.getTitle()).get("type");
 
-            // add rating to snippet always
-            String rating = rest_data.get(mark.getTitle()).get("rating");
-            for(int x = 0; x < Integer.parseInt(rating); x++){
-                snippet += "★";
-            }
-            snippet += "\n";
 
             mark.setSnippet(snippet);
 
