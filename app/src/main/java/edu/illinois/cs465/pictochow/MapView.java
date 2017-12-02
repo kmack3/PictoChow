@@ -2,7 +2,10 @@ package edu.illinois.cs465.pictochow;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.sax.StartElementListener;
 import android.support.annotation.ColorInt;
@@ -103,15 +106,40 @@ public class MapView extends Activity {
                 // get icons
                 icon_cur_loc = IconFactory.getInstance(MapView.this).fromResource(R.drawable.currentlocation);
 
-                icon_100_green = IconFactory.getInstance(MapView.this).fromResource(R.drawable.agreen);
-                icon_100_purple = IconFactory.getInstance(MapView.this).fromResource(R.drawable.apurple);
-                icon_75_green = IconFactory.getInstance(MapView.this).fromResource(R.drawable.bgreen);
-                icon_75_purple = IconFactory.getInstance(MapView.this).fromResource(R.drawable.bpurple);
-                icon_50_green = IconFactory.getInstance(MapView.this).fromResource(R.drawable.cgreen);
-                icon_50_purple = IconFactory.getInstance(MapView.this).fromResource(R.drawable.cpurple);
-                icon_25_green = IconFactory.getInstance(MapView.this).fromResource(R.drawable.dgreen);
-                icon_25_purple = IconFactory.getInstance(MapView.this).fromResource(R.drawable.dpurple);
-                icon_blank = IconFactory.getInstance(MapView.this).fromResource(R.drawable.blank);
+
+                Drawable dr = getResources().getDrawable(R.drawable.agreen);
+                Bitmap bitmap = ((BitmapDrawable) dr).getBitmap();
+                Bitmap scaled_agreen = Bitmap.createScaledBitmap(bitmap, 150, 150, true);
+                dr = getResources().getDrawable(R.drawable.apurple);
+                bitmap = ((BitmapDrawable) dr).getBitmap();
+                Bitmap scaled_apurple = Bitmap.createScaledBitmap(bitmap, 150, 150, true);
+                dr = getResources().getDrawable(R.drawable.bgreen);
+                bitmap = ((BitmapDrawable) dr).getBitmap();
+                Bitmap scaled_bgreen = Bitmap.createScaledBitmap(bitmap, 150, 150, true);
+                dr = getResources().getDrawable(R.drawable.bpurple);
+                bitmap = ((BitmapDrawable) dr).getBitmap();
+                Bitmap scaled_bpurple = Bitmap.createScaledBitmap(bitmap, 150, 150, true);
+                dr = getResources().getDrawable(R.drawable.cgreen);
+                bitmap = ((BitmapDrawable) dr).getBitmap();
+                Bitmap scaled_cgreen = Bitmap.createScaledBitmap(bitmap, 150, 150, true);
+                dr = getResources().getDrawable(R.drawable.cpurple);
+                bitmap = ((BitmapDrawable) dr).getBitmap();
+                Bitmap scaled_cpurple = Bitmap.createScaledBitmap(bitmap, 150, 150, true);
+                dr = getResources().getDrawable(R.drawable.dgreen);
+                bitmap = ((BitmapDrawable) dr).getBitmap();
+                Bitmap scaled_dgreen = Bitmap.createScaledBitmap(bitmap, 150, 150, true);
+                dr = getResources().getDrawable(R.drawable.dpurple);
+                bitmap = ((BitmapDrawable) dr).getBitmap();
+                Bitmap scaled_dpurple = Bitmap.createScaledBitmap(bitmap, 150, 150, true);
+
+                icon_100_green = IconFactory.getInstance(MapView.this).fromBitmap(scaled_agreen);
+                icon_100_purple = IconFactory.getInstance(MapView.this).fromBitmap(scaled_apurple);
+                icon_75_green = IconFactory.getInstance(MapView.this).fromBitmap(scaled_bgreen);
+                icon_75_purple = IconFactory.getInstance(MapView.this).fromBitmap(scaled_bpurple);
+                icon_50_green = IconFactory.getInstance(MapView.this).fromBitmap(scaled_cgreen);
+                icon_50_purple = IconFactory.getInstance(MapView.this).fromBitmap(scaled_cpurple);
+                icon_25_green = IconFactory.getInstance(MapView.this).fromBitmap(scaled_dgreen);
+                icon_25_purple = IconFactory.getInstance(MapView.this).fromBitmap(scaled_dpurple);
 
 
                 // current location marker
@@ -346,6 +374,7 @@ public class MapView extends Activity {
         if (requestCode == PICK_FILTER_REQUEST) {
             if (resultCode == RESULT_OK) {
                 String toasty = "";
+                selected_filters = new ArrayList<String>();
                 Boolean hurry = data.getBooleanExtra("hurry", false);
                 if (hurry){
                     toasty = toasty + "In a Hurry. ";
