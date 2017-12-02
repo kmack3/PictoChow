@@ -41,7 +41,7 @@ public class MapView extends Activity {
     private MapboxMap mapbox_map;
     private Icon icons [];
     private Marker markers [];
-    private Map<String, Map<String, String>> rest_data;
+    private HashMap<String, Map<String, String>> rest_data = new HashMap<String, Map<String, String>>();
 
     // Icons
 
@@ -372,7 +372,6 @@ public class MapView extends Activity {
     }
 
     public void init_data() {
-        rest_data = new HashMap<String, Map<String, String>>();
         Map<String, String> sakanaya_data = new HashMap<String, String>();
         Map<String, String> sh_data = new HashMap<String, String>();
         Map<String, String> cracked_data = new HashMap<String, String>();
@@ -432,6 +431,115 @@ public class MapView extends Activity {
         rest_data.put("Salad Meister", salad_data);
         rest_data.put("Bangkok Thai and Pho", bangkok_data);
         rest_data.put("Spoon House", sh_data);
+    }
+
+    public int calc_score(String restaurant) {
+        // must assign a score of 0, 25, 50, 75, or 100 to each restaurant
+        // where 100 means very well satisfies all selected filters
+        double total_score = 0;
+        int total_filters = 0;
+        for (String filter: selected_filters) {
+            if (filter.equals("hurry")) {
+                // this filter picks restaurants that are close and have low wait time
+                // 50 points allotted to being close
+                // 50 points allotted to being low wait time
+                double dist = Double.parseDouble((rest_data.get(restaurant)).get("distance"));
+                int wait = Integer.parseInt((rest_data.get(restaurant)).get("wait_time"));
+
+                // if it is more than 30 minute wait, does not contribute to the score
+                // 1-wait_time/30 * 50 is the points you get
+                double wait_score = 0;
+                if (wait <= 30) {
+                    wait_score = (1 - (double)wait/30) * 50;
+                }
+                // if it is more than .5 miles away, does not contribute to the score
+                // 1-(dist*10/5)* 50 is the points you get
+                double dist_score = 0;
+                if (dist <= .5) {
+                    dist_score = (1 - (dist * 10)/5)*50;
+                }
+                total_score += dist_score;
+                total_score += wait_score;
+                total_filters++;
+            }
+            else if (filter.equals("healthy")) {
+                // this filter picks restaurants that have high protein and low fat
+                // 50 points allotted to being high protein
+                // 50 points allotted to being low fat
+                String fat = (rest_data.get(restaurant)).get("fat");
+                String protein = (rest_data.get(restaurant)).get("protein");
+                if (fat.equals("low")) {
+                    total_score = +50;
+                }
+                if (protein.equals("high")) {
+                    total_score += 50;
+                }
+                total_filters++;
+            }
+            else if (filter.equals("fancy")) {
+                // this filter picks restaurants that are sit downs and rated highly
+                // 50 points allotted to being a sitdown
+                // 50 points allotted to being rated highly, calculated similarly to nearby and wait time
+                String sit = (rest_data.get(restaurant)).get("sitdown");
+                int rate = Integer.parseInt((rest_data.get(restaurant)).get("rating"));
+
+                if (sit.equals("yes")) {
+                    total_score += 50;
+                }
+                // avg rating % is found
+                // and that percentage of 50 points are added to the score
+                double rating_score = (double)rate/5 * 50;
+                total_score += rating_score;
+                total_filters++;
+            }
+            else { // filter is college
+                // this filter picks restaurants that are close and have low wait time and are cheap
+                // 30 points allotted to being close
+                // 30 points allotted to being low wait time
+                // 40 points allotted to being cheap
+                double dist = Double.parseDouble((rest_data.get(restaurant)).get("distance"));
+                int wait = Integer.parseInt((rest_data.get(restaurant)).get("wait_time"));
+                int price = Integer.parseInt((rest_data.get(restaurant)).get("price"));
+
+                // if it is more than 30 minute wait, does not contribute to the score
+                double wait_score = 0;
+                if (wait <= 30) {
+                    wait_score = (1 - (double)wait/30) * 30;
+                }
+                // if it is more than .5 miles away, does not contribute to the score
+                double dist_score = 0;
+                if (dist <= .5) {
+                    dist_score = (1 - (dist * 10)/5)*30;
+                }
+                // if it is more than 3 dollars signs expensive, does not contribute to score
+                double price_score = 0;
+                if (price <= 3) {
+                    price_score = (1 - ((double)price/3)) * 40;
+                }
+                total_score += dist_score;
+                total_score += wait_score;
+                total_score += price_score;
+                total_filters++;
+            }
+
+            double final_score = (total_score/((double)total_filters*100));
+            if (final_score < 1) {
+                return 0;
+            }
+            else if (final_score < 37.5 ) {
+                return 25;
+            }
+            else if (final_score < 62.5) {
+                return 50;
+            }
+            else if (final_score < 87.5) {
+                return 75;
+            }
+            else {
+                return 100;
+            }
+        }
+        return -1;
     }
 
     @Override
