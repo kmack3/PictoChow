@@ -156,6 +156,8 @@ public class MapView extends Activity {
                         .icon(icon_100_green)
                 );
 
+                updateMarkers();
+
 
 
                 // marker click listener
@@ -303,7 +305,8 @@ public class MapView extends Activity {
     public void updateMarkers(){
         Marker m []= new Marker[]{markerOne, markerTwo, markerThree, markerFour, markerFive};
         for(Marker mark: m){
-            int score = 100;
+            int score = calc_score(mark.getTitle());
+            Log.d("debugg", Integer.toString(score));
             if(score == 100){
                 mark.setIcon(icon_100_purple);
             }
@@ -366,6 +369,7 @@ public class MapView extends Activity {
                 if (!toasty.isEmpty()) {
                     Toast.makeText(this, toasty, Toast.LENGTH_SHORT).show();
                     updateMarkers();
+                    updateSnippets();
                 }
             }
         }
@@ -523,6 +527,8 @@ public class MapView extends Activity {
             }
 
             double final_score = (total_score/((double)total_filters*100));
+            final_score *= 100;
+            Log.d("debugg", String.valueOf(final_score));
             if (final_score < 1) {
                 return 0;
             }
