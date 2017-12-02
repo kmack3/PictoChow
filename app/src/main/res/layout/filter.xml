@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginLeft="10dp"
-        >
+        android:gravity="center_vertical">
 
         <TextView
             android:layout_width="wrap_content"
@@ -39,12 +39,13 @@
             android:text="Broke Student"
             android:textSize="40sp"
             android:textStyle="bold"
-            android:layout_gravity="left"/>
+            android:layout_gravity="left"
+            android:layout_marginRight="5dp"/>
 
         <CheckBox android:id="@+id/college"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onCheckboxClicked"/>
+            android:onClick="onCheckboxClicked" />
 
     </LinearLayout>
     <!-- END title of this filter -->
@@ -144,7 +145,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginLeft="10dp"
-        >
+        android:gravity="center_vertical">
 
         <TextView
             android:layout_width="wrap_content"
@@ -152,7 +153,8 @@
             android:text="In a Hurry"
             android:textSize="40sp"
             android:textStyle="bold"
-            android:layout_gravity="left"/>
+            android:layout_gravity="left"
+            android:layout_marginRight="5dp"/>
 
         <CheckBox android:id="@+id/hurry"
             android:layout_width="wrap_content"
@@ -235,7 +237,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginLeft="10dp"
-        >
+        android:gravity="center_vertical">
 
         <TextView
             android:layout_width="wrap_content"
@@ -243,7 +245,8 @@
             android:text="Nice Dinner"
             android:textSize="40sp"
             android:textStyle="bold"
-            android:layout_gravity="left"/>
+            android:layout_gravity="left"
+            android:layout_marginRight="5dp"/>
 
         <CheckBox android:id="@+id/fancy"
             android:layout_width="wrap_content"
@@ -324,7 +327,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginLeft="10dp"
-        >
+        android:gravity="center_vertical">
 
         <TextView
             android:layout_width="wrap_content"
@@ -332,7 +335,8 @@
             android:text="Healthy"
             android:textSize="40sp"
             android:textStyle="bold"
-            android:layout_gravity="left"/>
+            android:layout_gravity="left"
+            android:layout_marginRight="5dp"/>
 
         <CheckBox android:id="@+id/healthy"
             android:layout_width="wrap_content"
