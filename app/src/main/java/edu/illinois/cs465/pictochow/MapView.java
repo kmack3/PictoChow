@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.sax.StartElementListener;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.v4.graphics.ColorUtils;
@@ -30,7 +31,9 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MapView extends Activity {
     private int     filterSelected = -1;
@@ -38,6 +41,7 @@ public class MapView extends Activity {
     private MapboxMap mapbox_map;
     private Icon icons [];
     private Marker markers [];
+    private Map<String, Map<String, String>> rest_data;
 
     // Icons
     Icon icon_a_purple;
@@ -64,6 +68,8 @@ public class MapView extends Activity {
         super.onCreate(savedInstanceState);
         Mapbox.getInstance(this, "pk.eyJ1IjoianVzdGlubWVpZCIsImEiOiJjaXlxcGNkaXQwMDJlMndxa3E0cGEzNnBoIn0.LHVEjoFcv0ZD6Dkp7ObVzQ");
         setContentView(R.layout.activity_map_view);
+
+        init_data();
 
         // get buttons
         // randomButton = (Button) findViewById(R.id.randomButton);
@@ -284,6 +290,69 @@ public class MapView extends Activity {
                 updateMarkers();
             }
         }
+    }
+
+    public void init_data() {
+        rest_data = new HashMap<String, Map<String, String>>();
+        Map<String, String> sakanaya_data = new HashMap<String, String>();
+        Map<String, String> sh_data = new HashMap<String, String>();
+        Map<String, String> cracked_data = new HashMap<String, String>();
+        Map<String, String> bangkok_data = new HashMap<String, String>();
+        Map<String, String> salad_data = new HashMap<String, String>();
+
+        sakanaya_data.put("wait_time", "60");
+        sh_data.put("wait_time", "15");
+        cracked_data.put("wait_time", "30");
+        bangkok_data.put("wait_time", "15");
+        salad_data.put("wait_time", "45");
+
+        sakanaya_data.put("fat", "low");
+        sh_data.put("fat", "low");
+        cracked_data.put("fat", "high");
+        bangkok_data.put("fat", "high");
+        salad_data.put("fat", "low");
+
+        sakanaya_data.put("protein", "high");
+        sh_data.put("protein", "low");
+        cracked_data.put("protein", "high");
+        bangkok_data.put("protein", "high");
+        salad_data.put("protein", "low");
+
+        sakanaya_data.put("price", "5");
+        sh_data.put("price", "2");
+        cracked_data.put("price", "3");
+        bangkok_data.put("price", "2");
+        salad_data.put("price", "4");
+
+        sakanaya_data.put("rating", "4");
+        sh_data.put("rating", "5");
+        cracked_data.put("rating", "4");
+        bangkok_data.put("rating", "2");
+        salad_data.put("rating", "3");
+
+        sakanaya_data.put("type", "Sushi");
+        sh_data.put("type", "Korean");
+        cracked_data.put("type", "Breakfast");
+        bangkok_data.put("type", "Thai");
+        salad_data.put("type", "Soup and salad");
+
+        sakanaya_data.put("distance", ".2");
+        sh_data.put("distance", ".1");
+        cracked_data.put("distance", ".3");
+        bangkok_data.put("distance", ".1");
+        salad_data.put("distance", ".3");
+
+        sakanaya_data.put("sitdown", "yes");
+        sh_data.put("sitdown", "yes");
+        cracked_data.put("sitdown", "no");
+        bangkok_data.put("sitdown", "no");
+        salad_data.put("sitdown", "no");
+
+        rest_data.put("Sakanaya", sakanaya_data);
+        rest_data.put("Cracked", cracked_data);
+        rest_data.put("Salad Meister", salad_data);
+        rest_data.put("Bangkok Thai and Pho", bangkok_data);
+        rest_data.put("Spoon House", sh_data);
     }
 
     @Override
