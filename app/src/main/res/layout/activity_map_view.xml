@@ -10,9 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingBottom="3dp"
-        android:paddingTop="3dp"
-        android:gravity="right">
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp"
+        android:gravity="center_horizontal">
+
         <Button
             android:id="@+id/filterButton"
             android:layout_width="wrap_content"
@@ -22,42 +24,46 @@
             android:textSize="18sp"
             android:paddingRight="2dp"
             android:paddingLeft="2dp"
-            android:background="@color/buttonGrey"
-            android:layout_gravity="left" />
+            android:background="#FFF"
+            android:drawableTop="@drawable/filter"/>
+
+        <ToggleButton
+            android:id="@+id/visualizeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#FFF"
+            android:paddingRight="2dp"
+            android:paddingLeft="2dp"
+            android:textSize="18sp"
+            android:textOn="Visualize"
+            android:textOff="Visualize"
+            android:onClick="buttonHandler"
+            android:drawableTop="@drawable/eye"
+            android:layout_marginLeft="57dp"
+            android:layout_marginRight="40dp"/>
 
         <Button
             android:id="@+id/randomButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:background="@color/buttonGrey"
+            android:background="#FFF"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:paddingRight="2dp"
             android:paddingLeft="2dp"
             android:textSize="18sp"
             android:onClick="buttonHandler"
-            android:text="I'm Feeling Lucky" />
+            android:text="Random"
+            android:drawableTop="@drawable/shuffle"/>
 
-        <ToggleButton
-            android:id="@+id/visualizeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/buttonGrey"
-            android:paddingRight="2dp"
-            android:paddingLeft="2dp"
-            android:textSize="18sp"
-            android:textOn="Visualize Mode"
-            android:textOff="Visualize Mode"
-            android:layout_gravity="right"
-            android:onClick="buttonHandler"/>
     </LinearLayout>
 
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/actionBarCustom"
+        android:layout_above="@id/actionBarCustom"
         mapbox:mapbox_cameraTargetLat="40.110281"
         mapbox:mapbox_cameraTargetLng="-88.232022"
         mapbox:mapbox_styleUrl="mapbox://styles/mapbox/light-v9"
@@ -69,7 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="80dp"
         android:onClick="buttonHandler"/>
 
 </RelativeLayout>

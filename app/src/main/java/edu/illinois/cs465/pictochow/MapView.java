@@ -44,11 +44,19 @@ public class MapView extends Activity {
     private HashMap<String, Map<String, String>> rest_data = new HashMap<String, Map<String, String>>();
 
     // Icons
-    Icon icon_a_purple;
-    Icon icon_f_purple;
-    Icon icon_a_orange;
-    Icon icon_f_orange;
+
     Icon icon_cur_loc;
+
+
+    Icon icon_100_green;
+    Icon icon_100_purple;
+    Icon icon_75_green;
+    Icon icon_75_purple;
+    Icon icon_50_green;
+    Icon icon_50_purple;
+    Icon icon_25_green;
+    Icon icon_25_purple;
+
     // Markers
     Marker markerOne;
     Marker markerTwo;
@@ -92,11 +100,16 @@ public class MapView extends Activity {
                 mapbox_map = mapboxMap;
 
                 // get icons
-                icon_a_purple = IconFactory.getInstance(MapView.this).fromResource(R.drawable.apurple);
-                icon_f_purple = IconFactory.getInstance(MapView.this).fromResource(R.drawable.fpurple);
-                icon_a_orange = IconFactory.getInstance(MapView.this).fromResource(R.drawable.aorange);
-                icon_f_orange = IconFactory.getInstance(MapView.this).fromResource(R.drawable.forange);
                 icon_cur_loc = IconFactory.getInstance(MapView.this).fromResource(R.drawable.currentlocation);
+
+                icon_100_green = IconFactory.getInstance(MapView.this).fromResource(R.drawable.agreen);
+                icon_100_purple = IconFactory.getInstance(MapView.this).fromResource(R.drawable.apurple);
+                icon_75_green = IconFactory.getInstance(MapView.this).fromResource(R.drawable.bgreen);
+                icon_75_purple = IconFactory.getInstance(MapView.this).fromResource(R.drawable.bpurple);
+                icon_50_green = IconFactory.getInstance(MapView.this).fromResource(R.drawable.cgreen);
+                icon_50_purple = IconFactory.getInstance(MapView.this).fromResource(R.drawable.cpurple);
+                icon_25_green = IconFactory.getInstance(MapView.this).fromResource(R.drawable.dgreen);
+                icon_25_purple = IconFactory.getInstance(MapView.this).fromResource(R.drawable.dpurple);
 
 
 
@@ -111,35 +124,35 @@ public class MapView extends Activity {
                         .position(new LatLng(40.110113,-88.233218))
                         .title("Sakanaya")
                         .snippet("$$$\n★★★★\nSushi, Ramen")
-                        .icon(icon_f_purple)
+                        .icon(icon_100_green)
                 );
 
                 markerTwo = mapboxMap.addMarker(new MarkerOptions()
                         .position(new LatLng(40.1100646,-88.2296092))
                         .title("Cracked")
                         .snippet("$$\n★★★\nSandwich")
-                        .icon(icon_a_purple)
+                        .icon(icon_100_green)
                 );
 
                 markerThree = mapboxMap.addMarker(new MarkerOptions()
                         .position(new LatLng(40.1111668573957,-88.2305980101228))
                         .title("Salad Meister")
                         .snippet("$$\n★★★★\nSalad, Bread")
-                        .icon(icon_f_purple)
+                        .icon(icon_100_green)
                 );
 
                 markerFour = mapboxMap.addMarker(new MarkerOptions()
                         .position(new LatLng(40.1105683,-88.2325823))
                         .title("Bangkok Thai and Pho")
                         .snippet("$$\n★★★★★\nPho, Rice Noodle")
-                        .icon(icon_a_purple)
+                        .icon(icon_100_green)
                 );
 
                 markerFive = mapboxMap.addMarker(new MarkerOptions()
                         .position(new LatLng(40.1104414,-88.2317108))
                         .title("Spoon House")
                         .snippet("$$\n★★★★\nKorean, Kimchi")
-                        .icon(icon_a_purple)
+                        .icon(icon_100_green)
                 );
 
 
@@ -151,30 +164,18 @@ public class MapView extends Activity {
                        if(selectMode){
                             // toggle all markers except the current location marker
                             if(marker.getIcon()!=icon_cur_loc) {
-                                // check if marker has been selected
-                                if (selected.contains(marker.getTitle())) {
-                                    // toggle icon
-                                    if (marker.getIcon() == icon_a_orange) {
-                                        marker.setIcon(icon_a_purple);
-                                    } else {
-                                        marker.setIcon(icon_f_purple);
-                                    }
+                                // toggle icon
+                                IconToggle(marker);
 
-
-                                    // remove from selected arraylist
+                                // remove/add marker title from/to selected list
+                                if(selected.contains(marker.getTitle())){
                                     selected.remove(marker.getTitle());
-
-                                } else {
-                                    // toggle icon
-                                    if (marker.getIcon() == icon_a_purple) {
-                                        marker.setIcon(icon_a_orange);
-                                    } else {
-                                        marker.setIcon(icon_f_orange);
-                                    }
-
-                                    // add to selected arraylist
+                                }
+                                else {
                                     selected.add(marker.getTitle());
                                 }
+
+
 
                                 if (selected.size() == 2) {
                                     compareButton.setText(selected.get(0) + " vs. " + selected.get(1));
@@ -191,6 +192,19 @@ public class MapView extends Activity {
             }
         });
 
+
+    }
+
+    public void IconToggle(Marker m){
+        Icon curIcon = m.getIcon();
+        if(curIcon == icon_100_purple){ m.setIcon(icon_100_green); }
+        else if(curIcon == icon_100_green){ m.setIcon(icon_100_purple); }
+        else if(curIcon == icon_75_purple){ m.setIcon(icon_75_green); }
+        else if(curIcon == icon_75_green){ m.setIcon(icon_75_purple); }
+        else if(curIcon == icon_50_purple){ m.setIcon(icon_50_green); }
+        else if(curIcon == icon_50_green){ m.setIcon(icon_50_purple); }
+        else if(curIcon == icon_25_purple){ m.setIcon(icon_25_green); }
+        else if(curIcon == icon_25_green){ m.setIcon(icon_25_purple); }
 
     }
 
@@ -238,32 +252,32 @@ public class MapView extends Activity {
     public void updateMarkers(){
         switch (filterSelected){
             case 0:
-                markerOne.setIcon(icon_a_purple);
-                markerTwo.setIcon(icon_f_purple);
-                markerThree.setIcon(icon_a_purple);
-                markerFour.setIcon(icon_f_purple);
-                markerFive.setIcon(icon_a_purple);
+                markerOne.setIcon(icon_100_green);
+                markerTwo.setIcon(icon_100_green);
+                markerThree.setIcon(icon_100_green);
+                markerFour.setIcon(icon_100_green);
+                markerFive.setIcon(icon_100_green);
                 break;
             case 1:
-                markerOne.setIcon(icon_f_purple);
-                markerTwo.setIcon(icon_a_purple);
-                markerThree.setIcon(icon_f_purple);
-                markerFour.setIcon(icon_a_purple);
-                markerFive.setIcon(icon_f_purple);
+                markerOne.setIcon(icon_100_green);
+                markerTwo.setIcon(icon_100_green);
+                markerThree.setIcon(icon_100_green);
+                markerFour.setIcon(icon_100_green);
+                markerFive.setIcon(icon_100_green);
                 break;
             case 2:
-                markerOne.setIcon(icon_f_purple);
-                markerTwo.setIcon(icon_a_purple);
-                markerThree.setIcon(icon_a_purple);
-                markerFour.setIcon(icon_f_purple);
-                markerFive.setIcon(icon_a_purple);
+                markerOne.setIcon(icon_100_green);
+                markerTwo.setIcon(icon_100_green);
+                markerThree.setIcon(icon_100_green);
+                markerFour.setIcon(icon_100_green);
+                markerFive.setIcon(icon_100_green);
                 break;
             case 3:
-                markerOne.setIcon(icon_a_purple);
-                markerTwo.setIcon(icon_f_purple);
-                markerThree.setIcon(icon_f_purple);
-                markerFour.setIcon(icon_a_purple);
-                markerFive.setIcon(icon_f_purple);
+                markerOne.setIcon(icon_100_green);
+                markerTwo.setIcon(icon_100_green);
+                markerThree.setIcon(icon_100_green);
+                markerFour.setIcon(icon_100_green);
+                markerFive.setIcon(icon_100_green);
                 break;
         }
 
@@ -272,11 +286,11 @@ public class MapView extends Activity {
     public void DeselectAllMarkers(){
         Marker m []= new Marker[]{markerOne, markerTwo, markerThree, markerFour, markerFive};
         for(Marker mark: m){
-            if (mark.getIcon() == icon_a_orange) {
-                mark.setIcon(icon_a_purple);
+            if (mark.getIcon() == icon_100_green) {
+                mark.setIcon(icon_100_green);
             }
-            else if (mark.getIcon() == icon_f_orange){
-                mark.setIcon(icon_f_purple);
+            else if (mark.getIcon() == icon_100_green){
+                mark.setIcon(icon_100_green);
             }
         }
     }
