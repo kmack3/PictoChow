@@ -29,9 +29,6 @@ public class Filter extends Activity{
         selected.put("fancy", i.getBooleanExtra("fancy", false));
         selected.put("college", i.getBooleanExtra("college", false));
 
-        selected = new HashMap<String, Boolean>();
-
-
         CheckBox healthy_button = (CheckBox) findViewById(R.id.healthy);
         if (i.getBooleanExtra("healthy", false)) {
             healthy_button.setChecked(true);
