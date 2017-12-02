@@ -23,6 +23,120 @@
 
 
 
+
+    <!-- START ONE FILTER __________________________ -->
+    <!-- title of this filter -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Broke Student"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:layout_gravity="left"/>
+
+        <CheckBox android:id="@+id/college"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onCheckboxClicked"/>
+
+    </LinearLayout>
+    <!-- END title of this filter -->
+
+    <!-- LL for the list of checked items -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="5dp">
+
+        <!-- One checked list item -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:paddingTop="7dp"
+                android:id="@+id/check0"
+                android:scaleType="fitCenter"
+                android:src="@drawable/checkmark"/>
+
+
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Short wait time"
+                android:textSize="20sp"
+                android:layout_toRightOf="@id/check0"/>
+
+        </RelativeLayout>
+        <!-- END One checked list item -->
+
+        <!-- One checked list item -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:paddingTop="7dp"
+                android:id="@+id/check2"
+                android:scaleType="fitCenter"
+                android:src="@drawable/checkmark"/>
+
+
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Close by"
+                android:textSize="20sp"
+                android:layout_toRightOf="@id/check2"/>
+
+        </RelativeLayout>
+        <!-- END One checked list item -->
+
+        <!-- One checked list item -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:paddingTop="7dp"
+                android:id="@+id/check1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/checkmark"/>
+
+
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cheap"
+                android:textSize="20sp"
+                android:layout_toRightOf="@id/check1"/>
+
+        </RelativeLayout>
+        <!-- END One checked list item -->
+    </LinearLayout>
+    <!-- END LL for the list of checked items -->
+
     <!-- START ONE FILTER __________________________ -->
     <!-- title of this filter -->
     <LinearLayout
@@ -200,128 +314,6 @@
         <!-- END One checked list item -->
     </LinearLayout>
     <!-- END LL for the list of checked items -->
-
-
-
-
-
-
-
-
-    <!-- START ONE FILTER __________________________ -->
-    <!-- title of this filter -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Broke Student"
-            android:textSize="40sp"
-            android:textStyle="bold"
-            android:layout_gravity="left"/>
-
-        <CheckBox android:id="@+id/college"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onCheckboxClicked"/>
-
-    </LinearLayout>
-    <!-- END title of this filter -->
-
-    <!-- LL for the list of checked items -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="5dp">
-
-        <!-- One checked list item -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:paddingTop="7dp"
-                android:id="@+id/check0"
-                android:scaleType="fitCenter"
-                android:src="@drawable/checkmark"/>
-
-
-            <TextView
-                android:layout_marginLeft="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Short wait time"
-                android:textSize="20sp"
-                android:layout_toRightOf="@id/check0"/>
-
-        </RelativeLayout>
-        <!-- END One checked list item -->
-
-        <!-- One checked list item -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:paddingTop="7dp"
-                android:id="@+id/check2"
-                android:scaleType="fitCenter"
-                android:src="@drawable/checkmark"/>
-
-
-            <TextView
-                android:layout_marginLeft="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Close by"
-                android:textSize="20sp"
-                android:layout_toRightOf="@id/check2"/>
-
-        </RelativeLayout>
-        <!-- END One checked list item -->
-
-        <!-- One checked list item -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:paddingTop="7dp"
-                android:id="@+id/check1"
-                android:scaleType="fitCenter"
-                android:src="@drawable/checkmark"/>
-
-
-            <TextView
-                android:layout_marginLeft="5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cheap"
-                android:textSize="20sp"
-                android:layout_toRightOf="@id/check1"/>
-
-        </RelativeLayout>
-        <!-- END One checked list item -->
-    </LinearLayout>
-    <!-- END LL for the list of checked items -->
-
-
 
 
 

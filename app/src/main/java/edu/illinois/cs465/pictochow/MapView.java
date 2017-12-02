@@ -71,6 +71,7 @@ public class MapView extends Activity {
         setContentView(R.layout.activity_map_view);
 
         init_data();
+        selected_filters.add("college");
 
         // get buttons
         // randomButton = (Button) findViewById(R.id.randomButton);
@@ -308,8 +309,10 @@ public class MapView extends Activity {
                     toasty = toasty + "Nice Dinner. ";
                     selected_filters.add("fancy");
                 }
-                Toast.makeText(this, toasty, Toast.LENGTH_SHORT).show();
-                updateMarkers();
+                if (!toasty.isEmpty()) {
+                    Toast.makeText(this, toasty, Toast.LENGTH_SHORT).show();
+                    updateMarkers();
+                }
             }
         }
     }
