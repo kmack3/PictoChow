@@ -142,6 +142,8 @@ public class MapView extends Activity {
                 icon_25_purple = IconFactory.getInstance(MapView.this).fromBitmap(scaled_dpurple);
 
 
+
+
                 // current location marker
                 mapboxMap.addMarker(new MarkerOptions()
                         .position(new LatLng(40.110281,-88.232022))
@@ -183,6 +185,10 @@ public class MapView extends Activity {
                         .snippet("$$\n★★★★\nKorean, Kimchi")
                         .icon(icon_100_green)
                 );
+
+                updateMarkers();
+                updateSnippets();
+
 
 
 
@@ -270,16 +276,16 @@ public class MapView extends Activity {
                     snippet += "Sit down\n";
                 }
 
+                String rating = rest_data.get(mark.getTitle()).get("rating");
+                for(int x = 0; x < Integer.parseInt(rating); x++){
+                    snippet += "★";
+                }
+                snippet += "\n";
+
             }
             // add type to snippet always
-            snippet += rest_data.get(mark.getTitle()).get("type") + "\n";
+            snippet += rest_data.get(mark.getTitle()).get("type");
 
-            // add rating to snippet always
-            String rating = rest_data.get(mark.getTitle()).get("rating");
-            for(int x = 0; x < Integer.parseInt(rating); x++){
-                snippet += "★";
-            }
-            snippet += "\n";
 
             mark.setSnippet(snippet);
 
@@ -331,7 +337,8 @@ public class MapView extends Activity {
     public void updateMarkers(){
         Marker m []= new Marker[]{markerOne, markerTwo, markerThree, markerFour, markerFive};
         for(Marker mark: m){
-            int score = 100;
+            int score = calc_score(mark.getTitle());
+            Log.d("debugg", Integer.toString(score));
             if(score == 100){
                 mark.setIcon(icon_100_purple);
             }
@@ -395,6 +402,7 @@ public class MapView extends Activity {
                 if (!toasty.isEmpty()) {
                     Toast.makeText(this, toasty, Toast.LENGTH_SHORT).show();
                     updateMarkers();
+                    updateSnippets();
                 }
             }
         }
@@ -552,6 +560,8 @@ public class MapView extends Activity {
             }
 
             double final_score = (total_score/((double)total_filters*100));
+            final_score *= 100;
+            Log.d("debugg", String.valueOf(final_score));
             if (final_score < 1) {
                 return 0;
             }
