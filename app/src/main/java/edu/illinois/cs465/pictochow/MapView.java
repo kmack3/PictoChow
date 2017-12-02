@@ -56,6 +56,7 @@ public class MapView extends Activity {
     Icon icon_50_purple;
     Icon icon_25_green;
     Icon icon_25_purple;
+    Icon icon_blank;
 
     // Markers
     Marker markerOne;
@@ -110,7 +111,7 @@ public class MapView extends Activity {
                 icon_50_purple = IconFactory.getInstance(MapView.this).fromResource(R.drawable.cpurple);
                 icon_25_green = IconFactory.getInstance(MapView.this).fromResource(R.drawable.dgreen);
                 icon_25_purple = IconFactory.getInstance(MapView.this).fromResource(R.drawable.dpurple);
-
+                icon_blank = IconFactory.getInstance(MapView.this).fromResource(R.drawable.blank);
 
 
                 // current location marker
@@ -163,9 +164,11 @@ public class MapView extends Activity {
                     public boolean onMarkerClick(@NonNull Marker marker) {
                        if(selectMode){
                             // toggle all markers except the current location marker
-                            if(marker.getIcon()!=icon_cur_loc) {
+                            if(marker.getIcon()!=icon_cur_loc && marker.getIcon()!=icon_blank) {
                                 // toggle icon
                                 IconToggle(marker);
+
+
 
                                 // remove/add marker title from/to selected list
                                 if(selected.contains(marker.getTitle())){
@@ -205,6 +208,54 @@ public class MapView extends Activity {
         else if(curIcon == icon_50_green){ m.setIcon(icon_50_purple); }
         else if(curIcon == icon_25_purple){ m.setIcon(icon_25_green); }
         else if(curIcon == icon_25_green){ m.setIcon(icon_25_purple); }
+
+    }
+
+    public void updateSnippets(){
+        Marker m []= new Marker[]{markerOne, markerTwo, markerThree, markerFour, markerFive};
+
+        for(Marker mark: m){
+            String snippet = "";
+
+            if(selected_filters.contains("hurry")){
+                snippet += "Wait: " + rest_data.get(mark.getTitle()).get("wait_time") + " min\n";
+
+                snippet += rest_data.get(mark.getTitle()).get("distance") + " mi\n";
+            }
+
+            if(selected_filters.contains("healthy")){
+                snippet += rest_data.get(mark.getTitle()).get("fat") + " fat\n";
+                snippet += rest_data.get(mark.getTitle()).get("protein") + " protein\n";
+
+            }
+
+            if(selected_filters.contains("college")){
+                String price = rest_data.get(mark.getTitle()).get("price");
+                for(int x = 0; x < Integer.parseInt(price); x++){
+                    snippet += "$";
+                }
+                snippet += "\n";
+            }
+
+            if(selected_filters.contains("fancy")){
+                if(rest_data.get(mark.getTitle()).get("sitdown").equals("yes")){
+                    snippet += "Sit down\n";
+                }
+
+            }
+            // add type to snippet always
+            snippet += rest_data.get(mark.getTitle()).get("type") + "\n";
+
+            // add rating to snippet always
+            String rating = rest_data.get(mark.getTitle()).get("rating");
+            for(int x = 0; x < Integer.parseInt(rating); x++){
+                snippet += "★";
+            }
+            snippet += "\n";
+
+            mark.setSnippet(snippet);
+
+        }
 
     }
 
@@ -250,35 +301,25 @@ public class MapView extends Activity {
     }
 
     public void updateMarkers(){
-        switch (filterSelected){
-            case 0:
-                markerOne.setIcon(icon_100_green);
-                markerTwo.setIcon(icon_100_green);
-                markerThree.setIcon(icon_100_green);
-                markerFour.setIcon(icon_100_green);
-                markerFive.setIcon(icon_100_green);
-                break;
-            case 1:
-                markerOne.setIcon(icon_100_green);
-                markerTwo.setIcon(icon_100_green);
-                markerThree.setIcon(icon_100_green);
-                markerFour.setIcon(icon_100_green);
-                markerFive.setIcon(icon_100_green);
-                break;
-            case 2:
-                markerOne.setIcon(icon_100_green);
-                markerTwo.setIcon(icon_100_green);
-                markerThree.setIcon(icon_100_green);
-                markerFour.setIcon(icon_100_green);
-                markerFive.setIcon(icon_100_green);
-                break;
-            case 3:
-                markerOne.setIcon(icon_100_green);
-                markerTwo.setIcon(icon_100_green);
-                markerThree.setIcon(icon_100_green);
-                markerFour.setIcon(icon_100_green);
-                markerFive.setIcon(icon_100_green);
-                break;
+        Marker m []= new Marker[]{markerOne, markerTwo, markerThree, markerFour, markerFive};
+        for(Marker mark: m){
+            int score = 100;
+            if(score == 100){
+                mark.setIcon(icon_100_purple);
+            }
+            else if(score == 75){
+                mark.setIcon(icon_75_purple);
+            }
+            else if(score == 50){
+                mark.setIcon(icon_50_purple);
+            }
+            else if(score == 25){
+                mark.setIcon(icon_25_purple);
+            }
+            else {
+                mark.setIcon(icon_blank);
+            }
+
         }
 
     }
@@ -286,12 +327,11 @@ public class MapView extends Activity {
     public void DeselectAllMarkers(){
         Marker m []= new Marker[]{markerOne, markerTwo, markerThree, markerFour, markerFive};
         for(Marker mark: m){
-            if (mark.getIcon() == icon_100_green) {
-                mark.setIcon(icon_100_green);
-            }
-            else if (mark.getIcon() == icon_100_green){
-                mark.setIcon(icon_100_green);
-            }
+            Icon curIcon = mark.getIcon();
+            if(curIcon == icon_100_green){ mark.setIcon(icon_100_purple); }
+            else if(curIcon == icon_75_green){ mark.setIcon(icon_75_purple); }
+            else if(curIcon == icon_50_green){ mark.setIcon(icon_50_purple); }
+            else if(curIcon == icon_25_green){ mark.setIcon(icon_25_purple); }
         }
     }
 
