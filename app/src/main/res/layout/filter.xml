@@ -40,14 +40,11 @@
             android:textStyle="bold"
             android:layout_gravity="left"/>
 
-        <Button
+        <CheckBox android:id="@+id/hurry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
-            android:layout_marginLeft="110dp"
-            android:text="Select"
-            android:id="@+id/hurry"
-            />
+            android:onClick="onCheckboxClicked"/>
+
 
     </LinearLayout>
     <!-- END title of this filter -->
@@ -134,13 +131,10 @@
             android:textStyle="bold"
             android:layout_gravity="left"/>
 
-        <Button
+        <CheckBox android:id="@+id/fancy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
-            android:layout_marginLeft="77dp"
-            android:text="Select"
-            android:id="@+id/fancy"/>
+            android:onClick="onCheckboxClicked"/>
 
     </LinearLayout>
     <!-- END title of this filter -->
@@ -231,13 +225,10 @@
             android:textStyle="bold"
             android:layout_gravity="left"/>
 
-        <Button
+        <CheckBox android:id="@+id/college"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
-            android:layout_marginLeft="29dp"
-            android:text="Select"
-            android:id="@+id/college"/>
+            android:onClick="onCheckboxClicked"/>
 
     </LinearLayout>
     <!-- END title of this filter -->
@@ -351,13 +342,10 @@
             android:textStyle="bold"
             android:layout_gravity="left"/>
 
-        <Button
+        <CheckBox android:id="@+id/healthy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
-            android:layout_marginLeft="147dp"
-            android:text="Select"
-            android:id="@+id/healthy"/>
+            android:onClick="onCheckboxClicked"/>
 
     </LinearLayout>
     <!-- END title of this filter -->
