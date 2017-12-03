@@ -59,6 +59,8 @@
 
     </LinearLayout>
 
+
+
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
@@ -68,6 +70,13 @@
         mapbox:mapbox_cameraTargetLng="-88.232022"
         mapbox:mapbox_styleUrl="mapbox://styles/mapbox/light-v9"
         mapbox:mapbox_cameraZoom="16" />
+
+    <ImageView
+        android:layout_width="256dp"
+        android:layout_height="64dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/legend"
+        />
 
     <Button
         android:id="@+id/compareButton"
