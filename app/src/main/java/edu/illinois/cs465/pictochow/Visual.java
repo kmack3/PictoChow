@@ -80,7 +80,7 @@ public class Visual extends Activity {
         dist_entries.add(new BarEntry(Integer.parseInt(rest_data.get(targets[0]).get("distance")), 0));
         dist_entries.add(new BarEntry(Integer.parseInt(rest_data.get(targets[1]).get("distance")), 1));
         BarDataSet dist_set = new BarDataSet(dist_entries, "BarDataSet");
-        dist_set.setColors(ColorTemplate.VORDIPLOM_COLORS);
+        dist_set.setColors(ColorTemplate.JOYFUL_COLORS);
         dist_set.setBarSpacePercent(50f);
         YAxis dist_left = chart.getAxisLeft();
         dist_left.setDrawGridLines(false); // no grid lines
@@ -114,8 +114,8 @@ public class Visual extends Activity {
         ArrayList<LineDataSet> lines = new ArrayList<LineDataSet> ();
 
         LineDataSet lDataSet1 = new LineDataSet(dataset1, targets[0]);
-        lDataSet1.setColor(Color.RED);
-        lDataSet1.setCircleColor(Color.RED);
+        lDataSet1.setColor(Color.parseColor("#f99613"));
+        lDataSet1.setCircleColor(Color.parseColor("#f99613"));
         lDataSet1.setDrawValues(false);
         lDataSet1.setDrawCubic(true);
         lines.add(lDataSet1);
@@ -123,8 +123,8 @@ public class Visual extends Activity {
         LineDataSet lDataSet2 = new LineDataSet(dataset2, targets[1]);
         lDataSet2.setDrawValues(false);
         lDataSet2.setDrawCubic(true);
-        lDataSet2.setColor(Color.BLUE);
-        lDataSet2.setCircleColor(Color.BLUE);
+        lDataSet2.setColor(Color.parseColor("#f95499"));
+        lDataSet2.setCircleColor(Color.parseColor("#f95499"));
         lines.add(lDataSet2);
 
         lineChart.setData(new LineData(xAxis, lines));
