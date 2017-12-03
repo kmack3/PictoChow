@@ -3,10 +3,7 @@ package edu.illinois.cs465.pictochow;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
@@ -57,8 +54,9 @@ public class Visual extends Activity {
         // Initialize the wait time chart
         HorizontalBarChart chart = (HorizontalBarChart) findViewById(R.id.chart);
         List<BarEntry> entries = new ArrayList<>();
-        entries.add(new BarEntry(15f, 0));
-        entries.add(new BarEntry(5f, 1));
+
+        entries.add(new BarEntry(Integer.parseInt(rest_data.get(targets[0]).get("wait_time")), 0));
+        entries.add(new BarEntry(Integer.parseInt(rest_data.get(targets[1]).get("wait_time")), 1));
         BarDataSet set = new BarDataSet(entries, "BarDataSet");
         set.setColors(ColorTemplate.JOYFUL_COLORS);
         set.setBarSpacePercent(50f);
@@ -79,8 +77,8 @@ public class Visual extends Activity {
         // Initialize the distance chart
         HorizontalBarChart dist_chart = (HorizontalBarChart) findViewById(R.id.distance);
         List<BarEntry> dist_entries = new ArrayList<>();
-        dist_entries.add(new BarEntry(1000f, 0));
-        dist_entries.add(new BarEntry(500f, 1));
+        dist_entries.add(new BarEntry(Integer.parseInt(rest_data.get(targets[0]).get("distance")), 0));
+        dist_entries.add(new BarEntry(Integer.parseInt(rest_data.get(targets[1]).get("distance")), 1));
         BarDataSet dist_set = new BarDataSet(dist_entries, "BarDataSet");
         dist_set.setColors(ColorTemplate.VORDIPLOM_COLORS);
         dist_set.setBarSpacePercent(50f);
@@ -100,28 +98,18 @@ public class Visual extends Activity {
         // Initialize the popularity chart
         LineChart lineChart = (LineChart) findViewById(R.id.popularity);
         ArrayList<Entry> dataset1 = new ArrayList<Entry>();
-        dataset1.add(new Entry(1f, 0));
-        dataset1.add(new Entry(2f, 1));
-        dataset1.add(new Entry(3f, 2));
-        dataset1.add(new Entry(4f, 3));
-        dataset1.add(new Entry(5f, 4));
-        dataset1.add(new Entry(6f, 5));
-        dataset1.add(new Entry(7f, 6));
-        dataset1.add(new Entry(2f, 7));
-        dataset1.add(new Entry(5f, 8));
+        String[] trend_one = rest_data.get(targets[0]).get("trend").split(",");
+        for(int i=0;i<trend_one.length;i++){
+            dataset1.add(new Entry(Integer.parseInt(trend_one[i]), i));
+        }
 
         ArrayList<Entry> dataset2 = new ArrayList<Entry>();
-        dataset2.add(new Entry(3f, 0));
-        dataset2.add(new Entry(5f, 1));
-        dataset2.add(new Entry(2f, 2));
-        dataset2.add(new Entry(6f, 3));
-        dataset2.add(new Entry(7f, 4));
-        dataset2.add(new Entry(10f, 5));
-        dataset2.add(new Entry(2f, 6));
-        dataset2.add(new Entry(4f, 7));
-        dataset2.add(new Entry(6f, 8));
+        String[] trend_two = rest_data.get(targets[1]).get("trend").split(",");
+        for(int i=0;i<trend_two.length;i++){
+            dataset2.add(new Entry(Integer.parseInt(trend_two[i]), i));
+        }
 
-        String[] xAxis = new String[] {"8am", "10am", "12am", "2pm", "4pm", "6pm", "8pm", "10pm", "12pn"};
+        String[] xAxis = new String[] {"8am", "10am", "12am", "2pm", "4pm", "6pm", "8pm", "10pm"};
 
         ArrayList<LineDataSet> lines = new ArrayList<LineDataSet> ();
 
@@ -153,11 +141,15 @@ public class Visual extends Activity {
         PieChart pieChart_one = (PieChart) findViewById(R.id.rating_one);
 
         ArrayList<Entry> rating_one = new ArrayList<>();
-        rating_one.add(new Entry(1f, 0));
-        rating_one.add(new Entry(2f, 1));
-        rating_one.add(new Entry(10f, 2));
-        rating_one.add(new Entry(11f, 3));
-        rating_one.add(new Entry(18f, 4));
+        String [] rating_data_one = rest_data.get(targets[0]).get("rating").split(",");
+        for(int i=0;i<rating_data_one.length;i++){
+            rating_one.add(new Entry(Integer.parseInt(rating_data_one[i]), i));
+        }
+//        rating_one.add(new Entry(1, 0));
+//        rating_one.add(new Entry(2, 1));
+//        rating_one.add(new Entry(10, 2));
+//        rating_one.add(new Entry(11, 3));
+//        rating_one.add(new Entry(18, 4));
 
         PieDataSet rating_one_dataset = new PieDataSet(rating_one, "");
 
@@ -170,7 +162,7 @@ public class Visual extends Activity {
 
         PieData rating_one_data = new PieData(rating_labels, rating_one_dataset);
         rating_one_data.setValueTextSize(14);
-        rating_one_dataset.setColors(ColorTemplate.COLORFUL_COLORS); //
+        rating_one_dataset.setColors(ColorTemplate.COLORFUL_COLORS);
         pieChart_one.getLegend().setEnabled(false);
         pieChart_one.setDescription("Yelp rating");
         pieChart_one.setData(rating_one_data);
@@ -186,11 +178,15 @@ public class Visual extends Activity {
         PieChart pieChart_two = (PieChart) findViewById(R.id.rating_two);
 
         ArrayList<Entry> rating_two = new ArrayList<>();
-        rating_two.add(new Entry(1f, 0));
-        rating_two.add(new Entry(5f, 1));
-        rating_two.add(new Entry(1f, 2));
-        rating_two.add(new Entry(21f, 3));
-        rating_two.add(new Entry(1f, 4));
+        String [] rating_data_two = rest_data.get(targets[1]).get("rating").split(",");
+        for(int i=0;i<rating_data_two.length;i++){
+            rating_two.add(new Entry(Integer.parseInt(rating_data_two[i]), i));
+        }
+//        rating_two.add(new Entry(1, 0));
+//        rating_two.add(new Entry(5, 1));
+//        rating_two.add(new Entry(1, 2));
+//        rating_two.add(new Entry(21, 3));
+//        rating_two.add(new Entry(1, 4));
 
         PieDataSet rating_two_dataset = new PieDataSet(rating_two, "");
 
@@ -235,11 +231,11 @@ public class Visual extends Activity {
         bangkok_data.put("price", "2");
         salad_data.put("price", "4");
 
-        sakanaya_data.put("rating", "4");
-        sh_data.put("rating", "5");
-        cracked_data.put("rating", "4");
-        bangkok_data.put("rating", "2");
-        salad_data.put("rating", "3");
+        sakanaya_data.put("rating", "5,5,20,30,20");
+        sh_data.put("rating", "5,5,5,5,40");
+        cracked_data.put("rating", "1,4,20,30,10");
+        bangkok_data.put("rating", "10,30,20,10,5");
+        salad_data.put("rating", "10,20,30,20,10");
 
         sakanaya_data.put("type", "Sushi");
         sh_data.put("type", "Korean");
@@ -247,17 +243,26 @@ public class Visual extends Activity {
         bangkok_data.put("type", "Thai");
         salad_data.put("type", "Soup and salad");
 
-        sakanaya_data.put("distance", ".2");
-        sh_data.put("distance", ".1");
-        cracked_data.put("distance", ".3");
-        bangkok_data.put("distance", ".1");
-        salad_data.put("distance", ".3");
+        sakanaya_data.put("distance", "200");
+        sh_data.put("distance", "100");
+        cracked_data.put("distance", "300");
+        bangkok_data.put("distance", "100");
+        salad_data.put("distance", "300");
 
         sakanaya_data.put("sitdown", "yes");
         sh_data.put("sitdown", "yes");
         cracked_data.put("sitdown", "no");
         bangkok_data.put("sitdown", "no");
         salad_data.put("sitdown", "no");
+
+
+        sakanaya_data.put("trend", "0,3,7,0,3,7,10,7");
+        sh_data.put("trend", "0,2,5,5,3,4,7,0");
+        cracked_data.put("trend", "7,9,7,3,0,0,0,0");
+        bangkok_data.put("trend", "0,4,7,5,6,8,9,3");
+        salad_data.put("trend", "0,6,9,4,7,8,6,0");
+
+
 
         rest_data.put("Sakanaya", sakanaya_data);
         rest_data.put("Cracked", cracked_data);
