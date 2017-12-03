@@ -13,13 +13,12 @@ tools:context="edu.illinois.cs465.pictochow.LuckyResult">
     android:layout_width="wrap_content"
     android:layout_marginBottom="10dp"
     android:textSize="20sp"
-    android:text="You are going to:"/>
+    android:id="@+id/getting_random"/>
 <TextView
     android:id="@+id/chosen"
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
     android:textSize="30sp"
-    android:textColor="#800080"
-    android:text="Mia Za's"/>
+    android:textColor="#4BD37B" />
 
 </LinearLayout>
