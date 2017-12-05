@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -356,6 +357,27 @@ public class MapView extends Activity {
             }
 
         }
+        // update filter list
+        TextView filter_list = findViewById(R.id.filter_list);
+        String filters = "";
+        if (selected_filters.contains("hurry")){
+            filters = filters + "In a Hurry\n";
+            selected_filters.add("hurry");
+        }
+        if (selected_filters.contains("healthy")){
+            filters = filters + "Healthy\n";
+            selected_filters.add("healthy");
+        }
+        if (selected_filters.contains("college")){
+            filters = filters + "Broke Student\n";
+            selected_filters.add("college");
+        }
+        if (selected_filters.contains("fancy")){
+            filters = filters + "Nice Dinner\n";
+            selected_filters.add("fancy");
+        }
+        filter_list.setText(filters);
+
 
     }
 

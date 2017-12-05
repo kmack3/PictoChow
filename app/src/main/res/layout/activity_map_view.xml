@@ -78,6 +78,14 @@
         android:src="@drawable/legend"
         />
 
+    <TextView
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="15dp"
+        android:id="@+id/filter_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"/>
+
     <Button
         android:id="@+id/compareButton"
         android:layout_width="250dp"
