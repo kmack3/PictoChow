@@ -4,11 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Html;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -27,7 +30,8 @@ import java.util.Map;
 
 
 public class Visual extends Activity {
-    TextView title;
+    TextView target_one;
+    TextView target_two;
     private Map<String, Map<String, String>> rest_data;
 
     @Override
@@ -46,13 +50,14 @@ public class Visual extends Activity {
         String [] targets = restaurants.split(",");
 
         // Set up the title
-        title = (TextView) findViewById(R.id.title);
-        title.setText(targets[0]+" vs. "+targets[1]);
-
+        target_one = (TextView) findViewById(R.id.target_one);
+        target_two = (TextView) findViewById(R.id.target_two);
+        target_one.setText(targets[1]);
+        target_two.setText(targets[0]);
 
 
         // Initialize the wait time chart
-        HorizontalBarChart chart = (HorizontalBarChart) findViewById(R.id.chart);
+        BarChart chart = (BarChart) findViewById(R.id.chart);
         List<BarEntry> entries = new ArrayList<>();
 
         entries.add(new BarEntry(Integer.parseInt(rest_data.get(targets[0]).get("wait_time")), 0));
@@ -69,13 +74,12 @@ public class Visual extends Activity {
         data.setValueTextSize(12);
         chart.getLegend().setEnabled(false);   // Hide the legend
         chart.setData(data);
-        chart.setDescription("Wait Time Comparison");
+        chart.setDescription("");
         chart.animateY(2000);
-
-
+        chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
 
         // Initialize the distance chart
-        HorizontalBarChart dist_chart = (HorizontalBarChart) findViewById(R.id.distance);
+        BarChart dist_chart = (BarChart) findViewById(R.id.distance);
         List<BarEntry> dist_entries = new ArrayList<>();
         dist_entries.add(new BarEntry(Integer.parseInt(rest_data.get(targets[0]).get("distance")), 0));
         dist_entries.add(new BarEntry(Integer.parseInt(rest_data.get(targets[1]).get("distance")), 1));
@@ -91,8 +95,9 @@ public class Visual extends Activity {
         dist_data.setValueTextSize(12);
         dist_chart.getLegend().setEnabled(false);   // Hide the legend
         dist_chart.setData(dist_data);
-        dist_chart.setDescription("Distance Comparison");
+        dist_chart.setDescription("");
         dist_chart.animateY(2000);
+        dist_chart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
 
 
         // Initialize the popularity chart
@@ -113,14 +118,14 @@ public class Visual extends Activity {
 
         ArrayList<LineDataSet> lines = new ArrayList<LineDataSet> ();
 
-        LineDataSet lDataSet1 = new LineDataSet(dataset1, targets[0]);
+        LineDataSet lDataSet1 = new LineDataSet(dataset1, targets[1]);
         lDataSet1.setColor(Color.parseColor("#f99613"));
         lDataSet1.setCircleColor(Color.parseColor("#f99613"));
         lDataSet1.setDrawValues(false);
         lDataSet1.setDrawCubic(true);
         lines.add(lDataSet1);
 
-        LineDataSet lDataSet2 = new LineDataSet(dataset2, targets[1]);
+        LineDataSet lDataSet2 = new LineDataSet(dataset2, targets[0]);
         lDataSet2.setDrawValues(false);
         lDataSet2.setDrawCubic(true);
         lDataSet2.setColor(Color.parseColor("#f95499"));

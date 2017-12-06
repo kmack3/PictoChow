@@ -22,19 +22,48 @@
             android:weightSum="1">
 
 
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:gravity="center_horizontal"
+            android:weightSum="1">
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/target_one"
                 android:layout_height="wrap_content"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:gravity="center"
-                android:textSize="24dp"
-                android:textColor="#AE8BD8"
+                android:textSize="20dp"
+                android:textColor="#F29514"
                 android:paddingTop="50dp"
                 android:paddingBottom="40dp"
                 android:textStyle="bold"
                 android:text="Ttile" />
 
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:textColor="#AE8BD8"
+                android:paddingTop="50dp"
+                android:paddingBottom="40dp"
+                android:textStyle="bold"
+                android:text=" vs. " />
+
+            <TextView
+                android:id="@+id/target_two"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:textColor="#D3548B"
+                android:paddingTop="50dp"
+                android:paddingBottom="40dp"
+                android:textStyle="bold"
+                android:text="Ttile" />
+        </LinearLayout>
 
             <TextView
                 android:layout_height="wrap_content"
@@ -44,7 +73,7 @@
                 android:paddingBottom="5dp"
                 android:text="Wait time (minutes)" />
 
-            <com.github.mikephil.charting.charts.HorizontalBarChart
+            <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/chart"
                 android:layout_width="match_parent"
                 android:layout_height="300sp"
@@ -66,7 +95,7 @@
                 android:text="Distance (meters)" />
 
 
-            <com.github.mikephil.charting.charts.HorizontalBarChart
+            <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/distance"
             android:layout_width="match_parent"
             android:layout_height="300sp"
